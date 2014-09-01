@@ -92,9 +92,9 @@ tags.names = { "console", "work", "www", "fails", "media"}
 for s = 1, screen.count() do
 	-- Each screen has its own tag table.
 	if s == 1 then 
-		tags[s] = awful.tag({ "console", "work", "www", "fails", "media", "uoe"}, s, layouts[1])
+		tags[s] = awful.tag({ "console", "work", "www", "files", "media", "im", "vm", "other"}, s, layouts[1])
 	else	
-		tags[s] = awful.tag({ "console".."^".. s, "work".."^"..s, "www".."^"..s, "fails".."^"..s, "media".."^"..s, "uoe".."^"..s}, s, layouts[1])
+		tags[s] = awful.tag({ "console".."^".. s, "work".."^"..s, "www".."^"..s, "files".."^"..s, "media".."^"..s, "im".."^"..s, "vm".."^"..s, "other".."^"..s}, s, layouts[1])
 	end
 end
 tags.layoutConsole = { 
@@ -338,7 +338,7 @@ for i = 1, 9 do
 				  function ()
 				  		if i < 5 then
 							local screen = mouse.screen
-							local tag = awful.tag.gettags(screen)[i + 3]
+							local tag = awful.tag.gettags(screen)[i + 4]
 							if tag then
 							   awful.tag.viewonly(tag)
 							end

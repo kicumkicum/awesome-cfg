@@ -428,43 +428,57 @@ if screen.count() > 1 then
 -- {{{ Rules
 awful.rules.rules = {
 	-- All clients will match this rule.
-	{ rule = { },
-	  properties = { border_width = beautiful.border_width,
-					 border_color = beautiful.border_normal,
-					 focus = awful.client.focus.filter,
-					 keys = clientkeys,
-					 buttons = clientbuttons } },
-	{ rule = { class = "MPlayer" },
-	  properties = { floating = true }},
-	{ rule = { class = "pinentry" },
-	  properties = { floating = true } },
-	{ rule = { class = "gimp" },
-	  properties = { floating = true } },
-	 --Set Firefox to always map on tags number 2 of screen 1.
-	{
+	{ rule = {},
+		properties = {
+	  		border_width = beautiful.border_width,
+			border_color = beautiful.border_normal,
+			focus = awful.client.focus.filter,
+			keys = clientkeys,
+			buttons = clientbuttons
+		}
+	},{
+		rule = { class = "MPlayer" },
+	  	properties = { floating = true }
+	}, {
+		rule = { class = "pinentry" },
+	  	properties = { floating = true }
+	}, {
+		rule = { class = "gimp" },
+	 	properties = { floating = true }
+	}, {
 		rule = { class = "X-terminal-emulator" },
 	   	properties = { tag = tags[1][1] } 
 	}, {
 		rule = { class = "jetbrains-webstorm" },
 		properties = { tag = tags[1][2] } 
-	}, 
-	{
+	}, {
 		rule = { class = "Chromium-browser" },
 		properties = { tag = tags[1][2] } 
-	},
-	{ rule = { class = "Opera" },
-	   properties = { tag = tags[1][3] } },
-	{ rule = { class = "Google-chrome" },
-	   properties = { tag = tags[1][3] } },
-	{ rule = { class = "Firefox" },
-	   properties = { tag = tags[1][3] } },
-	{ rule = { class = "Nautilus" },
-	   properties = { tag = tags[1][4] } },
-	{ rule = { class = "Thunar" },
-	   properties = { tag = tags[1][4] } },
-	{ rule = { class = "Foobnix" },
-	   properties = { tag = tags[1][5] } } 
-							
+	}, { 
+		rule = { class = "Opera" },
+		properties = { tag = tags[1][3] }
+	}, { 
+		rule = { class = "Google-chrome" },
+	  	properties = { tag = tags[1][3] }
+	}, {
+		rule = { class = "Firefox" },
+		properties = { tag = tags[1][3] }
+	}, {
+		rule = { class = "Nautilus" },
+		properties = { tag = tags[1][4] }
+	}, {
+		rule = { class = "Thunar" },
+		properties = { tag = tags[1][4] }
+	}, {
+		rule = { class = "Foobnix" },
+		properties = { tag = tags[1][5] }
+	}, {
+		rule = {class = "Skype"},
+		properties = {tag = tags[1][6]}
+	}, {
+		rule = {class = "VirtualBox"},
+		properties = {tag = tags[1][7]}
+	}
 }
 -- }}}
 

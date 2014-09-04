@@ -92,9 +92,9 @@ tags.names = { "console", "work", "www", "fails", "media"}
 for s = 1, screen.count() do
 	-- Each screen has its own tag table.
 	if s == 1 then 
-		tags[s] = awful.tag({ "console", "work", "www", "files", "media", "im", "vm", "other"}, s, layouts[1])
+		tags[s] = awful.tag({ "console", "work", "www", "files", "im", "media", "vm", "other"}, s, layouts[1])
 	else	
-		tags[s] = awful.tag({ "console".."^".. s, "work".."^"..s, "www".."^"..s, "files".."^"..s, "media".."^"..s, "im".."^"..s, "vm".."^"..s, "other".."^"..s}, s, layouts[1])
+		tags[s] = awful.tag({ "console".."^".. s, "work".."^"..s, "www".."^"..s, "files".."^"..s, "im".."^"..s, "media".."^"..s, "vm".."^"..s, "other".."^"..s}, s, layouts[1])
 	end
 end
 tags.layoutConsole = { 

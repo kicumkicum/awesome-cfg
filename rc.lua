@@ -88,19 +88,16 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
-tags.names = { "console", "work", "www", "files", "im", "media", "vm", "other" }
-tags.layouts = {}
-
 local myTags = {
 	{
 		name = 'console',
-		layout = layouts[1]
+		layout = layouts[4]
 	}, {
 		name = 'work',
 		layout = layouts[1]
 	}, {
 		name = 'www',
-		layout = layouts[1]
+		layout = layouts[4]
 	}, {
 		name = 'files',
 		layout = layouts[1]
@@ -126,20 +123,14 @@ for s = 1, screen.count() do
 				tags, 
 				awful.tag.add(myTags[i].name, {s, myTags[i].layout})
 			)
-			-- tags[s] = awful.tag(tags.names, s, layouts[1])
 		else
 			table.insert(
 				tags, 
 				awful.tag.add(myTags[i].name.."^", {s, myTags[i].layout})
 			)	
-			-- tags[s] = awful.tag({ "console".."^".. s, "work".."^"..s, "www".."^"..s, "files".."^"..s, "im".."^"..s, "media".."^"..s, "vm".."^"..s, "other".."^"..s}, s, layouts[1])
 		end
 	end
 end
-tags.layoutConsole = { 
-	layouts[3], layouts[1] 
-}
---tags[1] = awful.tag(tags.names[1], 1, tags.layoutConsole)
 -- }}}
 
 -- {{{ Menu

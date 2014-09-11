@@ -16,6 +16,10 @@ local revelation = require("revelation")
 -- Load Debian menu entries
 local debian_menu = require("debian_menu")
 
+--Tyrannical—A simple tag managment engine for Awesome
+--git clone https://github.com/Elv13/tyrannical.git
+local tyrannical = require("tyrannical")
+
 require("wicked")
 
 -- {{{ Error handling
@@ -88,50 +92,95 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
-local myTags = {
-	{
-		name = 'console',
-		layout = layouts[4]
-	}, {
-		name = 'work',
-		layout = layouts[1]
-	}, {
-		name = 'www',
-		layout = layouts[4]
-	}, {
-		name = 'files',
-		layout = layouts[1]
-	}, {
-		name = 'im',
-		layout = layouts[1]
-	}, {
-		name = 'media',
-		layout = layouts[1]
-	}, {
-		name = 'vm',
-		layout = layouts[1]
-	}, {
-		name = 'other',
-		layout = layouts[1]
-	}
+tyrannical.tags = {
+    {
+        name        = "console",                 -- Call the tag "Term"
+        init        = true,                   -- Load the tag on startup
+        exclusive   = true,                   -- Refuse any other type of clients (by classes)
+        screen      = {1,2},                  -- Create this tag on screen 1 and screen 2
+        layout      = awful.layout.suit.tile, -- Use the tile layout
+        instance    = {"dev", "ops"},         -- Accept the following instances. This takes precedence over 'class'
+        class       = { --Accept the following classes, refuse everything else (because of "exclusive=true")
+            "xterm" , "urxvt" , "aterm","URxvt","XTerm","konsole","terminator","gnome-terminal"
+        }
+    } ,
+    {
+        name        = "work",
+        init        = true,
+        exclusive   = true,
+      --icon        = "~net.png",                 -- Use this icon for the tag (uncomment with a real path)
+        screen      = screen.count()>1 and 2 or 1,-- Setup on screen 2 if there is more than 1 screen, else on screen 1
+        layout      = awful.layout.suit.max,      -- Use the max layout
+        class = {
+            "Opera"         , "Firefox"        , "Rekonq"    , "Dillo"        , "Arora",
+            "Chromium"      , "nightly"        , "minefield"     }
+    } ,
+    {
+        name 		= "www",
+        init        = true,
+        exclusive   = true,
+        screen      = 1,
+        layout      = awful.layout.suit.tile,
+        exec_once   = {"dolphin"}, --When the tag is accessed for the first time, execute this command
+        class  = {
+            "Thunar", "Konqueror", "Dolphin", "ark", "Nautilus","emelfm"
+        }
+    } ,
+    {
+        name 		= "im",
+        init        = true,
+        exclusive   = true,
+        screen      = 1,
+        clone_on    = 2, -- Create a single instance of this tag on screen 1, but also show it on screen 2
+                         -- The tag can be used on both screen, but only one at once
+        layout      = awful.layout.suit.max                          ,
+        class ={ 
+            "Kate", "KDevelop", "Codeblocks", "Code::Blocks" , "DDD", "kate4"}
+    } ,
+    {
+        name        = "Doc",
+        init        = true, -- This tag wont be created at startup, but will be when one of the
+                             -- client in the "class" section will start. It will be created on
+                             -- the client startup screen
+        exclusive   = true,
+        layout      = awful.layout.suit.max,
+        class       = {
+            "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
+            "Xpdf"          ,                                        }
+    } ,
 }
 
-for s = 1, screen.count() do
-	for i = 1, #myTags do
-		if s == 1 then 
-			table.insert(
-				tags, 
-				awful.tag.add(myTags[i].name, {s, myTags[i].layout})
-			)
-		else
-			table.insert(
-				tags, 
-				awful.tag.add(myTags[i].name.."^", {s, myTags[i].layout})
-			)	
-		end
-	end
-end
+-- Ignore the tag "exclusive" property for the following clients (matched by classes)
+tyrannical.properties.intrusive = {
+    "ksnapshot"     , "pinentry"       , "gtksu"     , "kcalc"        , "xcalc"               ,
+    "feh"           , "Gradient editor", "About KDE" , "Paste Special", "Background color"    ,
+    "kcolorchooser" , "plasmoidviewer" , "Xephyr"    , "kruler"       , "plasmaengineexplorer",
+}
+
+-- Ignore the tiled layout for the matching clients
+tyrannical.properties.floating = {
+    "MPlayer"      , "pinentry"        , "ksnapshot"  , "pinentry"     , "gtksu"          ,
+    "xine"         , "feh"             , "kmix"       , "kcalc"        , "xcalc"          ,
+    "yakuake"      , "Select Color$"   , "kruler"     , "kcolorchooser", "Paste Special"  ,
+    "New Form"     , "Insert Picture"  , "kcharselect", "mythfrontend" , "plasmoidviewer" 
+}
+
+-- Make the matching clients (by classes) on top of the default layout
+tyrannical.properties.ontop = {
+    "Xephyr"       , "ksnapshot"       , "kruler"
+}
+
+-- Force the matching clients (by classes) to be centered on the screen on init
+tyrannical.properties.centered = {
+    "kcalc"
+}
+
+tyrannical.settings.block_children_focus_stealing = true --Block popups ()
+tyrannical.settings.group_children = true --Force popups/dialogs to have the same tags as the parent client
+
 -- }}}
+
+tags = awful.tag.gettags()
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
@@ -466,48 +515,48 @@ awful.rules.rules = {
 			keys = clientkeys,
 			buttons = clientbuttons
 		}
-	},{
-		rule = { class = "MPlayer" },
-	  	properties = { floating = true }
-	}, {
-		rule = { class = "pinentry" },
-	  	properties = { floating = true }
-	}, {
-		rule = { class = "gimp" },
-	 	properties = { floating = true }
-	}, {
-		rule = { class = "X-terminal-emulator" },
-	   	properties = { tag = tags[1][1] } 
-	}, {
-		rule = { class = "jetbrains-webstorm" },
-		properties = { tag = tags[1][2] } 
-	}, {
-		rule = { class = "Chromium-browser" },
-		properties = { tag = tags[1][2] } 
-	}, { 
-		rule = { class = "Opera" },
-		properties = { tag = tags[1][3] }
-	}, { 
-		rule = { class = "Google-chrome" },
-	  	properties = { tag = tags[1][3] }
-	}, {
-		rule = { class = "Firefox" },
-		properties = { tag = tags[1][3] }
-	}, {
-		rule = { class = "Nautilus" },
-		properties = { tag = tags[1][4] }
-	}, {
-		rule = { class = "Thunar" },
-		properties = { tag = tags[1][4] }
-	}, {
-		rule = { class = "Foobnix" },
-		properties = { tag = tags[1][5] }
-	}, {
-		rule = {class = "Skype"},
-		properties = {tag = tags[1][6]}
-	}, {
-		rule = {class = "VirtualBox"},
-		properties = {tag = tags[1][7]}
+	-- },{
+	-- 	rule = { class = "MPlayer" },
+	--   	properties = { floating = true }
+	-- }, {
+	-- 	rule = { class = "pinentry" },
+	--   	properties = { floating = true }
+	-- }, {
+	-- 	rule = { class = "gimp" },
+	--  	properties = { floating = true }
+	-- }, {
+	-- 	rule = { class = "X-terminal-emulator" },
+	--    	properties = { tag = tags[1][1] } 
+	-- }, {
+	-- 	rule = { class = "jetbrains-webstorm" },
+	-- 	properties = { tag = tags[1][2] } 
+	-- }, {
+	-- 	rule = { class = "Chromium-browser" },
+	-- 	properties = { tag = tags[1][2] } 
+	-- }, { 
+	-- 	rule = { class = "Opera" },
+	-- 	properties = { tag = tags[1][3] }
+	-- }, { 
+	-- 	rule = { class = "Google-chrome" },
+	--   	properties = { tag = tags[1][3] }
+	-- }, {
+	-- 	rule = { class = "Firefox" },
+	-- 	properties = { tag = tags[1][3] }
+	-- }, {
+	-- 	rule = { class = "Nautilus" },
+	-- 	properties = { tag = tags[1][4] }
+	-- }, {
+	-- 	rule = { class = "Thunar" },
+	-- 	properties = { tag = tags[1][4] }
+	-- }, {
+	-- 	rule = { class = "Foobnix" },
+	-- 	properties = { tag = tags[1][5] }
+	-- }, {
+	-- 	rule = {class = "Skype"},
+	-- 	properties = {tag = tags[1][6]}
+	-- }, {
+	-- 	rule = {class = "VirtualBox"},
+	-- 	properties = {tag = tags[1][7]}
 	}
 }
 -- }}}

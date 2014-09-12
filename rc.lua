@@ -103,30 +103,28 @@ tyrannical.tags = {
         class       = { --Accept the following classes, refuse everything else (because of "exclusive=true")
             "xterm" , "urxvt" , "aterm","URxvt","XTerm","konsole","terminator","gnome-terminal"
         }
-    } ,
-    {
+    }, {
         name        = "work",
         init        = true,
         exclusive   = true,
       --icon        = "~net.png",                 -- Use this icon for the tag (uncomment with a real path)
         screen      = screen.count()>1 and 2 or 1,-- Setup on screen 2 if there is more than 1 screen, else on screen 1
         layout      = awful.layout.suit.max,      -- Use the max layout
-        class = {
-            "Opera"         , "Firefox"        , "Rekonq"    , "Dillo"        , "Arora",
-            "Chromium"      , "nightly"        , "minefield"     }
-    } ,
-    {
+        class 		= {
+            "jetbrains-webstorm",
+		}
+    }, {
         name 		= "www",
         init        = true,
         exclusive   = true,
         screen      = 1,
         layout      = awful.layout.suit.tile,
         exec_once   = {"dolphin"}, --When the tag is accessed for the first time, execute this command
-        class  = {
-            "Thunar", "Konqueror", "Dolphin", "ark", "Nautilus","emelfm"
+        class  		= {
+            "Opera"         , "Firefox"        , "Rekonq"    , "Dillo"        , "Arora",
+		    "Chromium"      , "nightly"        , "minefield" , "Chrome"     
         }
-    } ,
-    {
+    }, {
         name 		= "im",
         init        = true,
         exclusive   = true,
@@ -134,11 +132,11 @@ tyrannical.tags = {
         clone_on    = 2, -- Create a single instance of this tag on screen 1, but also show it on screen 2
                          -- The tag can be used on both screen, but only one at once
         layout      = awful.layout.suit.max                          ,
-        class ={ 
-            "Kate", "KDevelop", "Codeblocks", "Code::Blocks" , "DDD", "kate4"}
-    } ,
-    {
-        name        = "Doc",
+        class 		= { 
+			"Skype"
+        }
+    }, {
+        name        = "files",
         init        = true, -- This tag wont be created at startup, but will be when one of the
                              -- client in the "class" section will start. It will be created on
                              -- the client startup screen
@@ -146,8 +144,42 @@ tyrannical.tags = {
         layout      = awful.layout.suit.max,
         class       = {
             "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
-            "Xpdf"          ,                                        }
-    } ,
+            "Xpdf"
+        }
+    }, {
+        name        = "media",
+        init        = true, -- This tag wont be created at startup, but will be when one of the
+                             -- client in the "class" section will start. It will be created on
+                             -- the client startup screen
+        exclusive   = true,
+        layout      = awful.layout.suit.max,
+        class       = {
+            "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
+            "Xpdf"
+        }
+    }, {
+        name        = "vm",
+        init        = true, -- This tag wont be created at startup, but will be when one of the
+                             -- client in the "class" section will start. It will be created on
+                             -- the client startup screen
+        exclusive   = true,
+        layout      = awful.layout.suit.max,
+        class       = {
+            "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
+            "Xpdf"
+        }
+    }, {
+        name        = "other",
+        init        = true, -- This tag wont be created at startup, but will be when one of the
+                             -- client in the "class" section will start. It will be created on
+                             -- the client startup screen
+        exclusive   = true,
+        layout      = awful.layout.suit.max,
+        class       = {
+            "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
+            "Xpdf"
+        }
+    }
 }
 
 -- Ignore the tag "exclusive" property for the following clients (matched by classes)

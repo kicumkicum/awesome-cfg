@@ -17,7 +17,7 @@ local revelation = require("revelation")
 local debian_menu = require("debian_menu")
 
 --Tyrannical—A simple tag managment engine for Awesome
---git clone https://github.com/Elv13/tyrannical.git
+--git clone https://github.com/Elv13	yrannical.git
 local tyrannical = require("tyrannical")
 
 require("wicked")
@@ -50,7 +50,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/home/oleg/.config/awesome/themes/zenburn/theme.lua")
+beautiful.init("/home/oleg/.config/awesome	hemes/zenburn	heme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -93,118 +93,116 @@ end
 -- Define a tag table which hold all screen tags.
 tags = {}
 tyrannical.tags = {
-    {
-        name        = "console",                 -- Call the tag "Term"
-        init        = true,                   -- Load the tag on startup
-        exclusive   = true,                   -- Refuse any other type of clients (by classes)
-        screen      = {1,2},                  -- Create this tag on screen 1 and screen 2
-        layout      = awful.layout.suit.tile, -- Use the tile layout
-        instance    = {"dev", "ops"},         -- Accept the following instances. This takes precedence over 'class'
-        class       = { --Accept the following classes, refuse everything else (because of "exclusive=true")
-            "xterm" , "urxvt" , "aterm","URxvt","XTerm","konsole","terminator","gnome-terminal"
-        }
-    }, {
-        name        = "work",
-        init        = true,
-        exclusive   = true,
-      --icon        = "~net.png",                 -- Use this icon for the tag (uncomment with a real path)
-        screen      = screen.count()>1 and 2 or 1,-- Setup on screen 2 if there is more than 1 screen, else on screen 1
-        layout      = awful.layout.suit.max,      -- Use the max layout
-        class 		= {
-            "jetbrains-webstorm",
+	{
+		name		= "console",			  -- Call the tag "Term"
+		init		= true,				   -- Load the tag on startup
+		exclusive   = true,				   -- Refuse any other type of clients (by classes)
+		screen		= {1, 2},				  -- Create this tag on screen 1 and screen 2
+		layout		= awful.layout.suit.tile, -- Use the tile layout
+		instance	= {"dev", "ops"},		 -- Accept the following instances. This takes precedence over 'class'
+		class		= { --Accept the following classes, refuse everything else (because of "exclusive=true")
+			"xterm", "urxvt", "aterm", "URxvt", "XTerm", "konsole", "terminator", "gnome-terminal"
 		}
-    }, {
-        name 		= "www",
-        init        = true,
-        exclusive   = true,
-        screen      = 1,
-        layout      = awful.layout.suit.tile,
-        exec_once   = {"dolphin"}, --When the tag is accessed for the first time, execute this command
-        class  		= {
-            "Opera"         , "Firefox"        , "Rekonq"    , "Dillo"        , "Arora",
-		    "Chromium"      , "nightly"        , "minefield" , "Chrome"     
-        }
-    }, {
-        name 		= "im",
-        init        = true,
-        exclusive   = true,
-        screen      = 1,
-        clone_on    = 2, -- Create a single instance of this tag on screen 1, but also show it on screen 2
-                         -- The tag can be used on both screen, but only one at once
-        layout      = awful.layout.suit.max                          ,
-        class 		= { 
+	}, {
+		name		= "work",
+		init		= true,
+		exclusive   = true,
+	  --icon		= "~net.png",				 -- Use this icon for the tag (uncomment with a real path)
+		screen		= screen.count()>1 and 2 or 1,-- Setup on screen 2 if there is more than 1 screen, else on screen 1
+		layout		= awful.layout.suit.max,	  -- Use the max layout
+		class 		= {
+			"jetbrains-webstorm"
+		}
+	}, {
+		name 		= "www",
+		init		= true,
+		exclusive   = true,
+		screen		= 1,
+		layout		= awful.layout.suit.tile,
+		exec_once	= {"dolphin"}, --When the tag is accessed for the first time, execute this command
+		class		= {
+			"Opera"		 , "Firefox"		, "Rekonq"	, "Dillo"		, "Arora",
+			"Chromium"	  , "nightly"		, "Google-chrome" , "Chrome"	 
+		}
+	}, {
+		name 		= "im",
+		init		= true,
+		exclusive   = true,
+		screen 		= 1,
+		clone_on	= 2, -- Create a single instance of this tag on screen 1, but also show it on screen 2
+						 -- The tag can be used on both screen, but only one at once
+		layout	= awful.layout.suit.max						  ,
+		class 		= { 
 			"Skype"
-        }
-    }, {
-        name        = "files",
-        init        = true, -- This tag wont be created at startup, but will be when one of the
-                             -- client in the "class" section will start. It will be created on
-                             -- the client startup screen
-        exclusive   = true,
-        layout      = awful.layout.suit.max,
-        class       = {
-            "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
-            "Xpdf"
-        }
-    }, {
-        name        = "media",
-        init        = true, -- This tag wont be created at startup, but will be when one of the
-                             -- client in the "class" section will start. It will be created on
-                             -- the client startup screen
-        exclusive   = true,
-        layout      = awful.layout.suit.max,
-        class       = {
-            "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
-            "Xpdf"
-        }
-    }, {
-        name        = "vm",
-        init        = true, -- This tag wont be created at startup, but will be when one of the
-                             -- client in the "class" section will start. It will be created on
-                             -- the client startup screen
-        exclusive   = true,
-        layout      = awful.layout.suit.max,
-        class       = {
-            "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
-            "Xpdf"
-        }
-    }, {
-        name        = "other",
-        init        = true, -- This tag wont be created at startup, but will be when one of the
-                             -- client in the "class" section will start. It will be created on
-                             -- the client startup screen
-        exclusive   = true,
-        layout      = awful.layout.suit.max,
-        class       = {
-            "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
-            "Xpdf"
-        }
-    }
+		}
+	}, {
+		name		= "files",
+		init		= true, -- This tag wont be created at startup, but will be when one of the
+							 -- client in the "class" section will start. It will be created on
+							 -- the client startup screen
+		exclusive   = true,
+		layout 		= awful.layout.suit.max,
+		class 		= {
+			"Thunar",	"Nautilus"
+		}			
+	}, {
+		name		= "media",
+		init		= true, -- This tag wont be created at startup, but will be when one of the
+							 -- client in the "class" section will start. It will be created on
+							 -- the client startup screen
+		exclusive   = true,
+		layout 		= awful.layout.suit.max,
+		class 		= {
+			"Assistant",	"Okular",	"Evince",	"EPDFviewer",	"xpdf",
+		"Xpdf"
+		}
+	}, {
+		name		= "vm",
+		init		= true, -- This tag wont be created at startup, but will be when one of the
+							-- client in the "class" section will start. It will be created on
+							-- the client startup screen
+		exclusive   = true,
+		layout		= awful.layout.suit.max,
+		class	  	= {
+			"VirtualBox"
+		}
+	}, {
+		name		= "other",
+		init		= true, -- This tag wont be created at startup, but will be when one of the
+							 -- client in the "class" section will start. It will be created on
+							 -- the client startup screen
+		exclusive   = true,
+		layout	  = awful.layout.suit.max,
+		class	   = {
+			"Assistant"	 , "Okular"		 , "Evince"	, "EPDFviewer"   , "xpdf",
+			"Xpdf"
+		}
+	}
 }
 
 -- Ignore the tag "exclusive" property for the following clients (matched by classes)
 tyrannical.properties.intrusive = {
-    "ksnapshot"     , "pinentry"       , "gtksu"     , "kcalc"        , "xcalc"               ,
-    "feh"           , "Gradient editor", "About KDE" , "Paste Special", "Background color"    ,
-    "kcolorchooser" , "plasmoidviewer" , "Xephyr"    , "kruler"       , "plasmaengineexplorer",
+	"ksnapshot"	 , "pinentry"	   , "gtksu"	 , "kcalc"		, "xcalc"			   ,
+	"feh"		   , "Gradient editor", "About KDE" , "Paste Special", "Background color"	,
+	"kcolorchooser" , "plasmoidviewer" , "Xephyr"	, "kruler"	   , "plasmaengineexplorer",
 }
 
 -- Ignore the tiled layout for the matching clients
 tyrannical.properties.floating = {
-    "MPlayer"      , "pinentry"        , "ksnapshot"  , "pinentry"     , "gtksu"          ,
-    "xine"         , "feh"             , "kmix"       , "kcalc"        , "xcalc"          ,
-    "yakuake"      , "Select Color$"   , "kruler"     , "kcolorchooser", "Paste Special"  ,
-    "New Form"     , "Insert Picture"  , "kcharselect", "mythfrontend" , "plasmoidviewer" 
+	"MPlayer"	  , "pinentry"		, "ksnapshot"  , "pinentry"	 , "gtksu"		  ,
+	"xine"		 , "feh"			 , "kmix"	   , "kcalc"		, "xcalc"		  ,
+	"yakuake"	  , "Select Color$"   , "kruler"	 , "kcolorchooser", "Paste Special"  ,
+	"New Form"	 , "Insert Picture"  , "kcharselect", "mythfrontend" , "plasmoidviewer" 
 }
 
 -- Make the matching clients (by classes) on top of the default layout
 tyrannical.properties.ontop = {
-    "Xephyr"       , "ksnapshot"       , "kruler"
+	"Xephyr"	   , "ksnapshot"	   , "kruler"
 }
 
 -- Force the matching clients (by classes) to be centered on the screen on init
 tyrannical.properties.centered = {
-    "kcalc"
+	"kcalc"
 }
 
 tyrannical.settings.block_children_focus_stealing = true --Block popups ()
@@ -346,9 +344,9 @@ end
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-	awful.key({ modkey,		    }, "Left",   awful.tag.viewprev	   ),
-	awful.key({ modkey,		    }, "Right",  awful.tag.viewnext	   ),
-	awful.key({ modkey,		    }, "#49", awful.tag.history.restore), -- "~"
+	awful.key({ modkey,			}, "Left",   awful.tag.viewprev	   ),
+	awful.key({ modkey,			}, "Right",  awful.tag.viewnext	   ),
+	awful.key({ modkey,			}, "#49", awful.tag.history.restore), -- "~"
 	-- awful.key({	modkey,			}, "e",  	revelation.revelation	,		   ),
 
 	awful.key({ modkey, "Control"}, "h", function () awful.screen.focus(1) end),
@@ -558,7 +556,7 @@ awful.rules.rules = {
 	--  	properties = { floating = true }
 	-- }, {
 	-- 	rule = { class = "X-terminal-emulator" },
-	--    	properties = { tag = tags[1][1] } 
+	--		properties = { tag = tags[1][1] } 
 	-- }, {
 	-- 	rule = { class = "jetbrains-webstorm" },
 	-- 	properties = { tag = tags[1][2] } 
@@ -678,9 +676,9 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- -- RAM usage tooltip
 -- memwidget = widget({
---     type = 'textbox',
---     name = 'memwidget'
+--	 type = 'textbox',
+--	 name = 'memwidget'
 -- })
 
 -- wicked.register(memwidget, wicked.widgets.mem,
---     ' <span color="white">Memory:</span> $1 ($2Mb/$3Mb)')
+--	 ' <span color="white">Memory:</span> $1 ($2Mb/$3Mb)')

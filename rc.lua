@@ -50,7 +50,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/home/oleg/.config/awesome	hemes/zenburn	heme.lua")
+beautiful.init("/home/oleg/.config/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -655,7 +655,6 @@ client.connect_signal("manage", function (c, startup)
 end)
 
 client.connect_signal("focus", function(c) 
-									c.border_color = beautiful.border_focus
 									naughty.notify({ 
 										preset = naughty.config.presets.critical,
 										title = "client",
@@ -665,6 +664,7 @@ client.connect_signal("focus", function(c)
 										title = "border",
 										text = beautiful.border_focus
 									})
+									c.border_color = beautiful.border_focus
 								end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}

@@ -655,18 +655,11 @@ client.connect_signal("manage", function (c, startup)
 end)
 
 client.connect_signal("focus", function(c) 
-									naughty.notify({ 
-										preset = naughty.config.presets.critical,
-										title = "client",
-										text = c})
-									naughty.notify({ 
-										preset = naughty.config.presets.critical,
-										title = "border",
-										text = beautiful.border_focus
-									})
 									c.border_color = beautiful.border_focus
 								end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("unfocus", function(c)
+									c.border_color = beautiful.border_normal
+								end)
 -- }}}
 
 

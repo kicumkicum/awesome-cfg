@@ -100,8 +100,9 @@ tyrannical.tags = {
 		screen		= {1, 2},				  -- Create this tag on screen 1 and screen 2
 		layout		= awful.layout.suit.tile, -- Use the tile layout
 		instance	= {"dev", "ops"},		 -- Accept the following instances. This takes precedence over 'class'
+		exec_once	= {"terminator"}, --When the tag is accessed for the first time, execute this command
 		class		= { --Accept the following classes, refuse everything else (because of "exclusive=true")
-			"xterm", "urxvt", "aterm", "URxvt", "XTerm", "konsole", "terminator", "gnome-terminal"
+			"X-terminal-emulator", "xterm", "urxvt", "aterm", "URxvt", "XTerm", "konsole", "terminator", "gnome-terminal"
 		}
 	}, {
 		name		= "work",
@@ -119,10 +120,8 @@ tyrannical.tags = {
 		exclusive   = true,
 		screen		= 1,
 		layout		= awful.layout.suit.tile,
-		exec_once	= {"dolphin"}, --When the tag is accessed for the first time, execute this command
 		class		= {
-			"Opera"		 , "Firefox"		, "Rekonq"	, "Dillo"		, "Arora",
-			"Chromium"	  , "nightly"		, "Google-chrome" , "Chrome"	 
+			"Opera", "Firefox", "Rekonq", "Dillo", "Arora", "Chromium", "nightly", "Google-chrome", "Chrome"	 
 		}
 	}, {
 		name 		= "im",
@@ -131,7 +130,7 @@ tyrannical.tags = {
 		screen 		= 1,
 		clone_on	= 2, -- Create a single instance of this tag on screen 1, but also show it on screen 2
 						 -- The tag can be used on both screen, but only one at once
-		layout	= awful.layout.suit.max						  ,
+		layout 		= awful.layout.suit.max,
 		class 		= { 
 			"Skype"
 		}
@@ -143,7 +142,7 @@ tyrannical.tags = {
 		exclusive   = true,
 		layout 		= awful.layout.suit.max,
 		class 		= {
-			"Thunar",	"Nautilus"
+			"Thunar", "Nautilus"
 		}			
 	}, {
 		name		= "media",
@@ -153,8 +152,7 @@ tyrannical.tags = {
 		exclusive   = true,
 		layout 		= awful.layout.suit.max,
 		class 		= {
-			"Assistant",	"Okular",	"Evince",	"EPDFviewer",	"xpdf",
-		"Xpdf"
+			"Foobnix"
 		}
 	}, {
 		name		= "vm",
@@ -172,32 +170,28 @@ tyrannical.tags = {
 							 -- client in the "class" section will start. It will be created on
 							 -- the client startup screen
 		exclusive   = true,
-		layout	  = awful.layout.suit.max,
-		class	   = {
-			"Assistant"	 , "Okular"		 , "Evince"	, "EPDFviewer"   , "xpdf",
-			"Xpdf"
-		}
+		layout 		= awful.layout.suit.max
 	}
 }
 
 -- Ignore the tag "exclusive" property for the following clients (matched by classes)
 tyrannical.properties.intrusive = {
-	"ksnapshot"	 , "pinentry"	   , "gtksu"	 , "kcalc"		, "xcalc"			   ,
-	"feh"		   , "Gradient editor", "About KDE" , "Paste Special", "Background color"	,
-	"kcolorchooser" , "plasmoidviewer" , "Xephyr"	, "kruler"	   , "plasmaengineexplorer",
+	"ksnapshot", "pinentry", "gtksu", "kcalc", "xcalc",
+	"feh", "Gradient editor", "About KDE", "Paste Special", "Background color",
+	"kcolorchooser", "plasmoidviewer", "Xephyr", "kruler", "plasmaengineexplorer",
 }
 
 -- Ignore the tiled layout for the matching clients
 tyrannical.properties.floating = {
-	"MPlayer"	  , "pinentry"		, "ksnapshot"  , "pinentry"	 , "gtksu"		  ,
-	"xine"		 , "feh"			 , "kmix"	   , "kcalc"		, "xcalc"		  ,
-	"yakuake"	  , "Select Color$"   , "kruler"	 , "kcolorchooser", "Paste Special"  ,
-	"New Form"	 , "Insert Picture"  , "kcharselect", "mythfrontend" , "plasmoidviewer" 
+	"MPlayer", "pinentry", "ksnapshot", "pinentry", "gtksu",
+	"xine", "feh", "kmix", "kcalc", "xcalc",
+	"yakuake", "Select Color$", "kruler", "kcolorchooser", "Paste Special",
+	"New Form", "Insert Picture", "kcharselect", "mythfrontend", "plasmoidviewer" 
 }
 
 -- Make the matching clients (by classes) on top of the default layout
 tyrannical.properties.ontop = {
-	"Xephyr"	   , "ksnapshot"	   , "kruler"
+	"Xephyr", "ksnapshot", "kruler"
 }
 
 -- Force the matching clients (by classes) to be centered on the screen on init
@@ -347,7 +341,7 @@ globalkeys = awful.util.table.join(
 	awful.key({ modkey,			}, "Left",   awful.tag.viewprev	   ),
 	awful.key({ modkey,			}, "Right",  awful.tag.viewnext	   ),
 	awful.key({ modkey,			}, "#49", awful.tag.history.restore), -- "~"
-	-- awful.key({	modkey,			}, "e",  	revelation.revelation	,		   ),
+	-- awful.key({	modkey,			}, "e",  	revelation.revelation,		   ),
 
 	awful.key({ modkey, "Control"}, "h", function () awful.screen.focus(1) end),
 	awful.key({ modkey, "Control"}, "s", function () awful.screen.focus(2) end),
@@ -660,7 +654,18 @@ client.connect_signal("manage", function (c, startup)
 	end
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("focus", function(c) 
+									c.border_color = beautiful.border_focus
+									naughty.notify({ 
+										preset = naughty.config.presets.critical,
+										title = "client",
+										text = c})
+									naughty.notify({ 
+										preset = naughty.config.presets.critical,
+										title = "border",
+										text = beautiful.border_focus
+									})
+								end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 

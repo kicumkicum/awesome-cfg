@@ -113,7 +113,7 @@ tyrannical.tags = {
 		screen		= screen.count() > 1 and 2 or 1,-- Setup on screen 2 if there is more than 1 screen, else on screen 1
 		layout		= awful.layout.suit.max,	  -- Use the max layout
 		class 		= {
-			"jetbrains-webstorm", "jetbrains-android-studio"
+			"jetbrains-webstorm", "jetbrains-android-studio", "jetbrains-android-studi", "Chromium-browser"
 		}
 	}, {
 		name 		= "www",
@@ -123,7 +123,7 @@ tyrannical.tags = {
 		screen		= 1,
 		layout		= awful.layout.suit.tile,
 		class		= {
-			"Opera", "Firefox", "Rekonq", "Dillo", "Arora", "Chromium", "nightly", "Google-chrome", "Chrome"	 
+			"Opera", "Opera developer", "Opera beta", "Firefox", "Rekonq", "Dillo", "Arora", "nightly", "Google-chrome", "Chrome"
 		}
 	}, {
 		name 		= "im",
@@ -167,7 +167,7 @@ tyrannical.tags = {
 		no_focus_stealing_in = true,
 		layout		= awful.layout.suit.max,
 		class	  	= {
-			"VirtualBox"
+			"VirtualBox", "Genymotion", "Player"
 		}
 	}, {
 		name		= "other",

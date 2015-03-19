@@ -121,7 +121,7 @@ tyrannical.tags = {
 		exclusive   = true,
 		no_focus_stealing_in = true,
 		screen		= 1,
-		layout		= awful.layout.suit.tile,
+		layout		= awful.layout.suit.max,
 		class		= {
 			"Opera", "Opera developer", "Opera beta", "Firefox", "Rekonq", "Dillo", "Arora", "nightly", "Google-chrome", "Chrome"
 		}
@@ -133,7 +133,7 @@ tyrannical.tags = {
 		screen 		= 1,
 		clone_on	= 2, -- Create a single instance of this tag on screen 1, but also show it on screen 2
 						 -- The tag can be used on both screen, but only one at once
-		layout 		= awful.layout.suit.max,
+		layout 		= awful.layout.suit.tile,
 		class 		= { 
 			"Skype"
 		}
@@ -144,7 +144,7 @@ tyrannical.tags = {
 							 -- the client startup screen
 		exclusive   = true,
 		no_focus_stealing_in = true,
-		layout 		= awful.layout.suit.max,
+		layout 		= awful.layout.suit.tile,
 		class 		= {
 			"Thunar", "Nautilus"
 		}			
@@ -154,7 +154,7 @@ tyrannical.tags = {
 							 -- client in the "class" section will start. It will be created on
 							 -- the client startup screen
 		exclusive   = true,
-		layout 		= awful.layout.suit.max,
+		layout 		= awful.layout.suit.tile,
 		class 		= {
 			"Foobnix"
 		}
@@ -176,7 +176,7 @@ tyrannical.tags = {
 							 -- the client startup screen
 		exclusive   = true,
 		no_focus_stealing_in = true,
-		layout 		= awful.layout.suit.max
+		layout 		= awful.layout.suit.tile
 	}
 }
 

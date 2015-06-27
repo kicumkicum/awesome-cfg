@@ -12,7 +12,7 @@ local naughty = require('naughty')
 local wibox = require('wibox')
 
 local plugins = require('plugins')
-local revelation = plugin.revelation
+local revelation = plugins.revelation
 local tyrannical = plugins.tyrannical
 
 -- {{{ Error handling

@@ -132,7 +132,7 @@ tyrannical.tags = {
 						 -- The tag can be used on both screen, but only one at once
 		layout 		= awful.layout.suit.max,
 		class 		= { 
-			'Skype'
+			'Skype', 'Telegram'
 		}
 	}, {
 		name		= 'files',

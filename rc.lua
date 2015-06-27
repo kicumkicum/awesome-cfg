@@ -5,13 +5,13 @@ local awful = require('awful')
 awful.rules = require('awful.rules')
 
 local beautiful = require('beautiful')
-local debian_menu = require('debian_menu')
 local gears = require('gears')
 local menubar = require('menubar')
 local naughty = require('naughty')
 local wibox = require('wibox')
 
 local plugins = require('plugins')
+local debianMenu = plugins.debianMenu
 local revelation = plugins.revelation
 local tyrannical = plugins.tyrannical
 
@@ -219,7 +219,7 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { 'awesome', myawesomemenu, beautiful.awesome_icon }--,
-									--{ 'Debian', debian_menu.Debian },
+									--{ 'Debian', debianMenu.Debian },
 									--{ 'open terminal', terminal }
 								}
 						})

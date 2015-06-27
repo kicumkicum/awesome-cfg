@@ -121,7 +121,7 @@ tyrannical.tags = {
 		screen		= 1,
 		layout		= awful.layout.suit.tile,
 		class		= {
-			'Opera', 'Firefox', 'Rekonq', 'Dillo', 'Arora', 'Chromium', 'nightly', 'Google-chrome', 'Chrome'	 
+			'Opera', 'Firefox', 'Rekonq', 'Dillo', 'Arora', 'Chromium', 'nightly', 'Google-chrome', 'Chrome', 'Opera developer', 'Vivaldi'
 		}
 	}, {
 		name 		= 'im',
@@ -142,7 +142,7 @@ tyrannical.tags = {
 		exclusive   = true,
 		layout 		= awful.layout.suit.max,
 		class 		= {
-			'Thunar', 'Nautilus'
+			'Thunar', 'Nautilus', 'Deluge'
 		}			
 	}, {
 		name		= 'media',
@@ -152,7 +152,7 @@ tyrannical.tags = {
 		exclusive   = true,
 		layout 		= awful.layout.suit.max,
 		class 		= {
-			'Foobnix'
+			'Foobnix', 'Steam'
 		}
 	}, {
 		name		= 'vm',
@@ -165,12 +165,15 @@ tyrannical.tags = {
 			'VirtualBox'
 		}
 	}, {
-		name		= 'other',
+		name		= 'edit',
 		init		= true, -- This tag wont be created at startup, but will be when one of the
 							 -- client in the 'class' section will start. It will be created on
 							 -- the client startup screen
 		exclusive   = true,
-		layout 		= awful.layout.suit.max
+		layout 		= awful.layout.suit.max,
+		class		= {
+			'Sublime_text'
+		}
 	}
 }
 

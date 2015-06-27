@@ -2,5 +2,5 @@
 	path = tyrannical
 	url = git@github.com:Elv13/tyrannical.git
 [submodule "awesome-revelation"]
-	path = revelation
+	path = awesome-revelation
 	url = git@github.com:bioe007/awesome-revelation.git

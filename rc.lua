@@ -1,27 +1,19 @@
 require('awful.autofocus')
+require('wicked')
+
 local awful = require('awful')
 awful.rules = require('awful.rules')
 
--- Standard awesome library
-local gears = require('gears')
--- Widget and layout library
-local wibox = require('wibox')
--- Theme handling library
 local beautiful = require('beautiful')
--- Notification library
-local naughty = require('naughty')
-local menubar = require('menubar')
-
-local revelation = require('revelation')
-
--- Load Debian menu entries
 local debian_menu = require('debian_menu')
+local gears = require('gears')
+local menubar = require('menubar')
+local naughty = require('naughty')
+local wibox = require('wibox')
 
---Tyrannical—A simple tag managment engine for Awesome
---git clone https://github.com/Elv13	yrannical.git
-local tyrannical = require('tyrannical')
-
-require('wicked')
+local plugins = require('plugins')
+local revelation = plugin.revelation
+local tyrannical = plugins.tyrannical
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to

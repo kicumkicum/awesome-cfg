@@ -1,8 +1,9 @@
--- Standard awesome library
-local gears = require('gears')
+require('awful.autofocus')
 local awful = require('awful')
 awful.rules = require('awful.rules')
-require('awful.autofocus')
+
+-- Standard awesome library
+local gears = require('gears')
 -- Widget and layout library
 local wibox = require('wibox')
 -- Theme handling library

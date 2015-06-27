@@ -96,8 +96,8 @@ tags = {}
 tyrannical.tags = {
 	{
 		name		= 'console',			  -- Call the tag 'Term'
-		init		= true,				   -- Load the tag on startup
-		exclusive   = true,				   -- Refuse any other type of clients (by classes)
+		init		= true,					-- Load the tag on startup
+		exclusive	= true,					-- Refuse any other type of clients (by classes)
 		screen		= {1, 2},				  -- Create this tag on screen 1 and screen 2
 		layout		= awful.layout.suit.tile, -- Use the tile layout
 		instance	= {'dev', 'ops'},		 -- Accept the following instances. This takes precedence over 'class'
@@ -108,7 +108,7 @@ tyrannical.tags = {
 	}, {
 		name		= 'work',
 		init		= true,
-		exclusive   = true,
+		exclusive	= true,
 		no_focus_stealing_in = true,
 	  --icon		= "~net.png",				 -- Use this icon for the tag (uncomment with a real path)
 		screen		= screen.count() > 1 and 2 or 1,-- Setup on screen 2 if there is more than 1 screen, else on screen 1
@@ -119,7 +119,7 @@ tyrannical.tags = {
 	}, {
 		name 		= 'www',
 		init		= true,
-		exclusive   = true,
+		exclusive	= true,
 		no_focus_stealing_in = true,
 		screen		= 1,
 		layout		= awful.layout.suit.max,
@@ -129,7 +129,7 @@ tyrannical.tags = {
 	}, {
 		name 		= 'im',
 		init		= true,
-		exclusive   = true,
+		exclusive	= true,
 		no_focus_stealing_in = true,
 		screen 		= 1,
 		clone_on	= 2, -- Create a single instance of this tag on screen 1, but also show it on screen 2
@@ -143,7 +143,7 @@ tyrannical.tags = {
 		init		= true, -- This tag wont be created at startup, but will be when one of the
 							 -- client in the 'class' section will start. It will be created on
 							 -- the client startup screen
-		exclusive   = true,
+		exclusive	= true,
 		no_focus_stealing_in = true,
 		layout 		= awful.layout.suit.tile,
 		class 		= {
@@ -154,7 +154,7 @@ tyrannical.tags = {
 		init		= true, -- This tag wont be created at startup, but will be when one of the
 							 -- client in the 'class' section will start. It will be created on
 							 -- the client startup screen
-		exclusive   = true,
+		exclusive	= true,
 		layout 		= awful.layout.suit.tile,
 		class 		= {
 			'Foobnix', 'Steam'
@@ -164,7 +164,7 @@ tyrannical.tags = {
 		init		= true, -- This tag wont be created at startup, but will be when one of the
 							-- client in the 'class' section will start. It will be created on
 							-- the client startup screen
-		exclusive   = true,
+		exclusive	= true,
 		no_focus_stealing_in = true,
 		layout		= awful.layout.suit.max,
 		class	  	= {
@@ -175,7 +175,7 @@ tyrannical.tags = {
 		init		= true, -- This tag wont be created at startup, but will be when one of the
 							 -- client in the 'class' section will start. It will be created on
 							 -- the client startup screen
-		exclusive   = true,
+		exclusive	= true,
 		layout 		= awful.layout.suit.max,
 		class		= {
 			'Sublime_text'
@@ -220,10 +220,10 @@ tags = awful.tag.gettags()
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
-   { 'manual', terminal .. ' -e man awesome' },
-   { 'edit config', editor_cmd .. ' ' .. awesome.conffile },
-   { 'restart', awesome.restart },
-   { 'quit', awesome.quit }
+	{ 'manual', terminal .. ' -e man awesome' },
+	{ 'edit config', editor_cmd .. ' ' .. awesome.conffile },
+	{ 'restart', awesome.restart },
+	{ 'quit', awesome.quit }
 }
 
 mymainmenu = awful.menu({ items = { { 'awesome', myawesomemenu, beautiful.awesome_icon }--,
@@ -302,10 +302,10 @@ for s = 1, screen.count() do
 	-- We need one layoutbox per screen.
 	mylayoutbox[s] = awful.widget.layoutbox(s)
 	mylayoutbox[s]:buttons(awful.util.table.join(
-						   awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-						   awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-						   awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-						   awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
+							awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
+							awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
+							awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
+							awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
 	-- Create a taglist widget
 	mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
@@ -349,35 +349,35 @@ end
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-	awful.key({ modkey,			}, 'Left',   awful.tag.viewprev	   ),
-	awful.key({ modkey,			}, 'Right',  awful.tag.viewnext	   ),
+	awful.key({ modkey,			}, 'Left',	awful.tag.viewprev		),
+	awful.key({ modkey,			}, 'Right',  awful.tag.viewnext		),
 	awful.key({ modkey,			}, '#49', awful.tag.history.restore), -- '~'
-	-- awful.key({	modkey,			}, 'e',  	revelation.revelation,		   ),
+	-- awful.key({	modkey,			}, 'e',  	revelation.revelation,			),
 
 	awful.key({ modkey, 'Control'}, 'h', function () awful.screen.focus(1) end),
 	awful.key({ modkey, 'Control'}, 's', function () awful.screen.focus(2) end),
 
 	awful.key({ modkey, 'Control'}, 'm', awful.client.movetoscreen),
 
-	awful.key({ modkey,		   	}, 'j',	function ()
+	awful.key({ modkey,				}, 'j',	function ()
 											awful.client.focus.byidx( 1)
 											if client.focus then client.focus:raise() end
 										end
 	),
-	awful.key({ modkey, 	   }, 'k',	function ()
+	awful.key({ modkey, 		}, 'k',	function ()
 											awful.client.focus.byidx(-1)
 											if client.focus then client.focus:raise() end
 										end
 	),
-	awful.key({ modkey,		   }, 'w', function () mymainmenu:show() end),
+	awful.key({ modkey,			}, 'w', function () mymainmenu:show() end),
 
 	-- Layout manipulation
-	awful.key({ modkey, 'Shift'   	}, 'j', function () awful.client.swap.byidx(  1)	end),
-	awful.key({ modkey, 'Shift'   	}, 'k', function () awful.client.swap.byidx( -1)	end),
+	awful.key({ modkey, 'Shift'		}, 'j', function () awful.client.swap.byidx(  1)	end),
+	awful.key({ modkey, 'Shift'		}, 'k', function () awful.client.swap.byidx( -1)	end),
 	awful.key({ modkey, 'Control' 	}, 'j', function () awful.screen.focus_relative( 1) end),
 	awful.key({ modkey, 'Control' 	}, 'k', function () awful.screen.focus_relative(-1) end),
-	awful.key({ modkey,		   		}, 'u', awful.client.urgent.jumpto),
-	awful.key({ modkey,		   		}, 'Tab',function ()
+	awful.key({ modkey,					}, 'u', awful.client.urgent.jumpto),
+	awful.key({ modkey,					}, 'Tab',function ()
 												awful.client.focus.history.previous()
 												if client.focus then
 													client.focus:raise()
@@ -386,18 +386,18 @@ globalkeys = awful.util.table.join(
 	),
 	
 	-- Standard program
-	awful.key({ modkey,		   		}, 'Return', function () awful.util.spawn(terminal) end),
+	awful.key({ modkey,					}, 'Return', function () awful.util.spawn(terminal) end),
 	awful.key({ modkey, 'Control' 	}, 'r', awesome.restart),
-	awful.key({ modkey, 'Shift'   	}, 'q', awesome.quit),
+	awful.key({ modkey, 'Shift'		}, 'q', awesome.quit),
 
 	awful.key({ modkey,		  		}, 'l',	 function () awful.tag.incmwfact( 0.05)	end),
 	awful.key({ modkey,				}, 'h',	 function () awful.tag.incmwfact(-0.05)	end),
-	awful.key({ modkey, 'Shift'   	}, 'h',	 function () awful.tag.incnmaster( 1)	  end),
-	awful.key({ modkey, 'Shift'   	}, 'l',	 function () awful.tag.incnmaster(-1)	  end),
+	awful.key({ modkey, 'Shift'		}, 'h',	 function () awful.tag.incnmaster( 1)	  end),
+	awful.key({ modkey, 'Shift'		}, 'l',	 function () awful.tag.incnmaster(-1)	  end),
 	-- awful.key({ modkey, 'Control' 	}, 'h',	 function () awful.tag.incncol( 1)		 end),
 	awful.key({ modkey, 'Control' 	}, 'l',	 function () awful.tag.incncol(-1)		 end),
-	awful.key({ modkey,		   		}, 'space', function () awful.layout.inc(layouts,  1) end),
-	awful.key({ modkey, 'Shift'   	}, 'space', function () awful.layout.inc(layouts, -1) end),
+	awful.key({ modkey,					}, 'space', function () awful.layout.inc(layouts,  1) end),
+	awful.key({ modkey, 'Shift'		}, 'space', function () awful.layout.inc(layouts, -1) end),
 
 	awful.key({ modkey, 'Control' 	}, 'n', awful.client.restore),
 
@@ -416,22 +416,22 @@ globalkeys = awful.util.table.join(
 )
 
 clientkeys = awful.util.table.join(
-	awful.key({ modkey,		   }, 'f',	  function (c) c.fullscreen = not c.fullscreen  end),
+	awful.key({ modkey,			}, 'f',	  function (c) c.fullscreen = not c.fullscreen  end),
 	awful.key({ modkey, 'Control' }, '#9',	  function (c) c:kill()						 end),
 	awful.key({ modkey, 'Control' }, 'space',  awful.client.floating.toggle					 ),
 	awful.key({ modkey, 'Control' }, 'Return', function (c) c:swap(awful.client.getmaster()) end),
-	--awful.key({ modkey,		   }, 'o',	  awful.client.movetoscreen						),
-	awful.key({ modkey,		   }, 't',	  function (c) c.ontop = not c.ontop			end),
-	awful.key({ modkey,		   }, 'n',
+	--awful.key({ modkey,			}, 'o',	  awful.client.movetoscreen						),
+	awful.key({ modkey,			}, 't',	  function (c) c.ontop = not c.ontop			end),
+	awful.key({ modkey,			}, 'n',
 		function (c)
 			-- The client currently has the input focus, so it cannot be
 			-- minimized, since minimized clients can't have the focus.
 			c.minimized = true
 		end),
-	awful.key({ modkey,		   }, 'm',
+	awful.key({ modkey,			}, 'm',
 		function (c)
 			c.maximized_horizontal = not c.maximized_horizontal
-			c.maximized_vertical   = not c.maximized_vertical
+			c.maximized_vertical	= not c.maximized_vertical
 		end)
 )
 
@@ -445,7 +445,7 @@ for i = 1, 9 do
 						local screen = mouse.screen
 						local tag = awful.tag.gettags(screen)[i]
 						if tag then
-					   		awful.tag.viewonly(tag)
+								awful.tag.viewonly(tag)
 						end
 				  end),
 		awful.key({ modkey, 'Mod1' }, '#' .. i + 9,
@@ -454,7 +454,7 @@ for i = 1, 9 do
 							local screen = mouse.screen
 							local tag = awful.tag.gettags(screen)[i + 4]
 							if tag then
-							   awful.tag.viewonly(tag)
+								awful.tag.viewonly(tag)
 							end
 						end
 				  end),
@@ -552,10 +552,10 @@ awful.rules.rules = {
 		}
 	-- },{
 	-- 	rule = { class = 'MPlayer' },
-	--   	properties = { floating = true }
+	--		properties = { floating = true }
 	-- }, {
 	-- 	rule = { class = 'pinentry' },
-	--   	properties = { floating = true }
+	--		properties = { floating = true }
 	-- }, {
 	-- 	rule = { class = 'gimp' },
 	--  	properties = { floating = true }
@@ -573,7 +573,7 @@ awful.rules.rules = {
 	-- 	properties = { tag = tags[1][3] }
 	-- }, { 
 	-- 	rule = { class = 'Google-chrome' },
-	--   	properties = { tag = tags[1][3] }
+	--		properties = { tag = tags[1][3] }
 	-- }, {
 	-- 	rule = { class = 'Firefox' },
 	-- 	properties = { tag = tags[1][3] }

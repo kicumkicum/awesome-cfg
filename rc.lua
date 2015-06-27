@@ -19,10 +19,11 @@ local tyrannical = plugins.tyrannical
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
-	naughty.notify({	preset = naughty.config.presets.critical,
-						title = 'Oops, there were errors during startup!',
-						text = awesome.startup_errors 
-					})
+	naughty.notify({
+        preset = naughty.config.presets.critical,
+        title = 'Oops, there were errors during startup!',
+		text = awesome.startup_errors
+    })
 end
 
 -- Handle runtime errors after startup
@@ -30,32 +31,26 @@ do
 	local in_error = false
 	awesome.connect_signal('debug::error', function (err)
 		-- Make sure we don't go into an endless error loop
-		if in_error then return end
+		if in_error then
+            return
+        end
 		in_error = true
 
-		naughty.notify({ preset = naughty.config.presets.critical,
-						title = 'Oops, an error happened!',
-						text = err })
+		naughty.notify({
+            preset = naughty.config.presets.critical,
+			title = 'Oops, an error happened!',
+			text = err
+        })
 		in_error = false
 	end)
 end
 -- }}}
 
--- {{{ Variable definitions
--- Themes define colours, icons, and wallpapers
 beautiful.init('/home/oleg/.config/awesome/themes/zenburn/theme.lua')
-
--- This is used later as the default terminal and editor to run.
-terminal = 'x-terminal-emulator'
 editor = 'sublime' -- os.getenv('EDITOR') or
 editor_cmd = terminal .. ' -e ' .. editor
-
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = 'Mod4'
+terminal = 'x-terminal-emulator'
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts = {
@@ -274,7 +269,7 @@ mytasklist.buttons = awful.util.table.join(
 												instance:hide()
 												instance = nil
 											else
-												instance = awful.menu.clients({ width=250 })
+												instance = awful.menu.clients({width = 250})
 											end
 										end)--,
 					--awful.button({ }, 4, function ()
@@ -294,10 +289,10 @@ for s = 1, screen.count() do
 	-- We need one layoutbox per screen.
 	mylayoutbox[s] = awful.widget.layoutbox(s)
 	mylayoutbox[s]:buttons(awful.util.table.join(
-							awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-							awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-							awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-							awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
+							awful.button({}, 1, function () awful.layout.inc(layouts, 1) end),
+							awful.button({}, 3, function () awful.layout.inc(layouts, -1) end),
+							awful.button({}, 4, function () awful.layout.inc(layouts, 1) end),
+							awful.button({}, 5, function () awful.layout.inc(layouts, -1) end)))
 	-- Create a taglist widget
 	mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
@@ -305,7 +300,10 @@ for s = 1, screen.count() do
 	mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
 	-- Create the wibox
-	mywibox[s] = awful.wibox({ position = 'top', screen = s })
+	mywibox[s] = awful.wibox({
+        position = 'top',
+        screen = s
+    })
 
 	-- Widgets that are aligned to the left
 	local left_layout = wibox.layout.fixed.horizontal()

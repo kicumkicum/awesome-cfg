@@ -27,7 +27,7 @@ end
 -- Handle runtime errors after startup
 do
 	local in_error = false
-	awesome.connect_signal('debug::error', function (err)
+	awesome.connect_signal('debug::error', function(err)
 		-- Make sure we don't go into an endless error loop
 		if in_error then
             return
@@ -107,7 +107,7 @@ mytaglist.buttons = awful.util.table.join(
 					)
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
-					awful.button({ }, 1, function (c)
+					awful.button({ }, 1, function(c)
 											if c == client.focus then
 												-- c.minimized = true
 											else
@@ -123,10 +123,10 @@ mytasklist.buttons = awful.util.table.join(
 												c:raise()
 											end
 										end),
-					awful.button({ }, 2, function (c) 
+					awful.button({ }, 2, function(c) 
 											c:kill() --close window by scroll
 										end),
-					awful.button({ }, 3, function ()
+					awful.button({ }, 3, function()
 											if instance then
 												instance:hide()
 												instance = nil
@@ -134,11 +134,11 @@ mytasklist.buttons = awful.util.table.join(
 												instance = awful.menu.clients({width = 250})
 											end
 										end)--,
-					--awful.button({ }, 4, function ()
+					--awful.button({ }, 4, function()
 						--					awful.client.focus.byidx(1)
 						--					if client.focus then client.focus:raise() end
 						--				end),
-					--awful.button({ }, 5, function ()
+					--awful.button({ }, 5, function()
 						--					awful.client.focus.byidx(-1)
 						--					if client.focus then client.focus:raise() end
 						--				end)
@@ -151,10 +151,10 @@ for s = 1, screen.count() do
 	-- We need one layoutbox per screen.
 	mylayoutbox[s] = awful.widget.layoutbox(s)
 	mylayoutbox[s]:buttons(awful.util.table.join(
-							awful.button({}, 1, function () awful.layout.inc(layouts, 1) end),
-							awful.button({}, 3, function () awful.layout.inc(layouts, -1) end),
-							awful.button({}, 4, function () awful.layout.inc(layouts, 1) end),
-							awful.button({}, 5, function () awful.layout.inc(layouts, -1) end)))
+							awful.button({}, 1, function() awful.layout.inc(layouts, 1) end),
+							awful.button({}, 3, function() awful.layout.inc(layouts, -1) end),
+							awful.button({}, 4, function() awful.layout.inc(layouts, 1) end),
+							awful.button({}, 5, function() awful.layout.inc(layouts, -1) end)))
 	-- Create a taglist widget
 	mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
@@ -193,7 +193,7 @@ end
 
 -- {{{ Mouse bindings
 --root.buttons(awful.util.table.join(
---	awful.button({ }, 3, function () mymainmenu:toggle() end),
+--	awful.button({ }, 3, function() mymainmenu:toggle() end),
 --	awful.button({ }, 4, awful.tag.viewnext),
 --	awful.button({ }, 5, awful.tag.viewprev)
 --))
@@ -219,7 +219,7 @@ awful.rules.rules = {
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
-client.connect_signal('manage', function (c, startup)
+client.connect_signal('manage', function(c, startup)
 	-- Enable sloppy focus
 --	c:connect_signal('mouse::enter', function(c)
  --	if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier

@@ -1,3 +1,8 @@
+modkey = 'Mod4'
+terminal = 'x-terminal-emulator'
+editor = 'sublime' -- os.getenv('EDITOR') or
+editor_cmd = terminal .. ' -e ' .. editor
+
 require('awful.autofocus')
 require('wicked')
 
@@ -18,7 +23,7 @@ local layout = require('rules.layout')
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
-    popup.error()
+    popup.error('awesome.startup_errors')
 end
 
 -- Handle runtime errors after startup
@@ -38,10 +43,6 @@ end
 -- }}}
 
 beautiful.init('/home/oleg/.config/awesome/themes/zenburn/theme.lua')
-terminal = 'x-terminal-emulator'
-editor = 'sublime' -- os.getenv('EDITOR') or
-editor_cmd = terminal .. ' -e ' .. editor
-modkey = 'Mod4'
 
 local layouts = layout.init()
 

@@ -10,9 +10,7 @@ local plugins = {}
 
 --Tyrannical—A simple tag managment engine for Awesome
 --git clone https://github.com/Elv13	yrannical.git
-plugins.debianMenu = require('plugins.debian_menu')
 plugins.revelation = require('plugins.revelation')
 plugins.tyrannical = require('plugins.tyrannical')
-plugins.wicked = require('plugins.wicked')
 
 return plugins

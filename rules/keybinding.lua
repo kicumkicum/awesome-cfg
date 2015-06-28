@@ -7,7 +7,6 @@
 --
 local awful = require('awful')
 local keybinging = {}
-local popup = require('widget.popup')
 
 keybinging.init = function()
 	globalkeys = keybinging.global()
@@ -227,7 +226,6 @@ keybinging.tasks = {
 	action = {
 		runTerminal = awful.key({modkey}, 'Return', function()
 			awful.util.spawn(terminal)
-			popup.error(modkey)
 		end),
 		restartAwesome = awful.key({modkey, 'Control'}, 'r', awesome.restart),
 		quitAwesome = awful.key({modkey, 'Shift'}, 'q', awesome.quit),

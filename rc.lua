@@ -19,28 +19,8 @@ local tag = require('rules.tag')
 local keybinding = require('rules.keybinding')
 local layout = require('rules.layout')
 
--- {{{ Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
-if awesome.startup_errors then
-    popup.error('awesome.startup_errors')
-end
-
--- Handle runtime errors after startup
-do
-	local in_error = false
-	awesome.connect_signal('debug::error', function(err)
-		-- Make sure we don't go into an endless error loop
-		if in_error then
-            return
-        end
-
-		in_error = true
-		popup.error('', err)
-		in_error = false
-	end)
-end
--- }}}
+checkStartupError()
+bindErrorHandler()
 
 beautiful.init('/home/oleg/.config/awesome/themes/zenburn/theme.lua')
 local layouts = layout.init()
@@ -146,3 +126,23 @@ client.connect_signal('unfocus', function(c)
 									c.border_color = beautiful.border_normal
 								end)
 -- }}}
+
+function checkStartupError()
+	if awesome.startup_errors then
+		popup.error('awesome.startup_errors')
+	end
+end
+
+function bindErrorHandler()
+	local in_error = false
+	awesome.connect_signal('debug::error', function(err)
+		-- Make sure we don't go into an endless error loop
+		if in_error then
+			return
+		end
+
+		in_error = true
+		popup.error('', err)
+		in_error = false
+	end)
+end

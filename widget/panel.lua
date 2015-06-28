@@ -82,7 +82,7 @@ end
 
 
 panel.createScreen = function(layouts, screenIndex, mytasklist, mytaglist, mytextclock)
-	local mypromptbox = {}
+	mypromptbox = {}-- todo make local
 	local mylayoutbox = {}
 	local mywibox = {}
 	

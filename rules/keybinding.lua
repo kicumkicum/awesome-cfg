@@ -7,9 +7,9 @@
 --
 local awful = require('awful')
 
-local keys = {}
+local keybinging = {}
 
-keys.init = function()
+keybinging.init = function()
     -- {{{Key bindings
     globalkeys = awful.util.table.join(
         awful.key({}, 'XF86AudioRaiseVolume', function() awful.util.spawn('amixer set Master 2%+') end),
@@ -190,4 +190,4 @@ keys.init = function()
     -- }}}
 end
 
-return keys
+return keybinging

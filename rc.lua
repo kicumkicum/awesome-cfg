@@ -11,7 +11,7 @@ local wibox = require('wibox')
 
 local popup = require('widget.popup')
 local tag = require('rules.tag')
-local keys = require('rules.keys')
+local keybinding = require('rules.keybinding')
 local layout = require('rules.layout')
 
 -- {{{ Error handling
@@ -192,7 +192,7 @@ end
 --))
 -- }}}
 
-keys.init()
+keybinding.init()
 
 -- {{{ Rules
 awful.rules.rules = {

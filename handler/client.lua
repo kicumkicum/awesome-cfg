@@ -11,8 +11,6 @@ local wibox = require('wibox')
 local client = {}
 
 client.onManage = function(c, startup)
-    popup.log('uoeueo')
-
     -- Enable sloppy focus
     --	c:connect_signal('mouse::enter', function(c)
     --	if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier

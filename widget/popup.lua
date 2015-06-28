@@ -9,11 +9,11 @@
 local naughty = require('naughty')
 local popup = {}
 
-popup.error = function()
+popup.error = function(text)
     naughty.notify({
         preset = naughty.config.presets.critical,
         title = 'Oops, there were errors during startup!',
-        text = 'awesome.startup_errors'
+        text = text
     })
 end
 

@@ -134,8 +134,8 @@ end
 
 
 keybinging.client = function()
-	local client = {}
-	client.keys = awful.util.table.join(
+	local result = {}
+	result.clientKeys = awful.util.table.join(
 		awful.key({modkey}, 'f', function(c) c.fullscreen = not c.fullscreen end),
 		awful.key({modkey, 'Control'}, '#9', function(c) c:kill()						end),
 		awful.key({modkey, 'Control'}, 'space', awful.client.floating.toggle					),
@@ -153,13 +153,13 @@ keybinging.client = function()
 		end)
 	)
 
-	client.buttons = awful.util.table.join(
+	result.clientButtons = awful.util.table.join(
 		awful.button({}, 1, function(c) client.focus = c; c:raise() end),
-		awful.button({modkey}, 1, awful.mouse.client.move),
+		awful.button({modkey}, 1, function() awful.mouse.client.move() end),
 		awful.button({}, 2, function(c) client.focus = c; c:raise() end),
 		awful.button({modkey}, 3, awful.mouse.client.resize)),
 		awful.button({}, 3, function(c) client.focus = c; c:raise() end)
-	return client
+	return result
 end
 
 

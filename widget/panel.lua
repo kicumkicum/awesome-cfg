@@ -13,8 +13,8 @@ local wibox = require('wibox')
 local panel = {}
 
 
-panel.init = function()
-	panel.createDisplay(mytasklist)
+panel.init = function(layouts)
+	panel.createDisplay(layouts)
 end
 
 panel.createClock = function()
@@ -69,19 +69,19 @@ panel.createPromptBox = function()
 end
 
 
-panel.createDisplay = function()
+panel.createDisplay = function(layouts)
 	menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 	local mytextclock = panel.createClock()
 	local mytaglist = panel.createTagList()
 	local mytasklist = panel.createTaskList()
 
 	for screenIndex = 1, screen.count() do
-		panel.createScreen(screenIndex, mytasklist, mytaglist, mytextclock)
+		panel.createScreen(layouts, screenIndex, mytasklist, mytaglist, mytextclock)
 	end
 end
 
 
-panel.createScreen = function(screenIndex, mytasklist, mytaglist, mytextclock)
+panel.createScreen = function(layouts, screenIndex, mytasklist, mytaglist, mytextclock)
 	local mypromptbox = {}
 	local mylayoutbox = {}
 	local mywibox = {}

@@ -9,10 +9,12 @@ local awful = require('awful')
 local keybinging = {}
 
 keybinging.init = function()
-	globalkeys = keybinging.global()
-	root.keys(globalkeys)
-
-	keybinging.client()
+	local globalKeys = keybinging.global()
+	local client = keybinging.client()
+	return {
+		globalKeys = globalKeys,
+		client = client
+	}
 end
 
 
@@ -132,7 +134,8 @@ end
 
 
 keybinging.client = function()
-	clientkeys = awful.util.table.join(
+	local client = {}
+	client.keys = awful.util.table.join(
 		awful.key({modkey}, 'f', function(c) c.fullscreen = not c.fullscreen end),
 		awful.key({modkey, 'Control'}, '#9', function(c) c:kill()						end),
 		awful.key({modkey, 'Control'}, 'space', awful.client.floating.toggle					),
@@ -150,12 +153,13 @@ keybinging.client = function()
 		end)
 	)
 
-	clientbuttons = awful.util.table.join(
+	client.buttons = awful.util.table.join(
 		awful.button({}, 1, function(c) client.focus = c; c:raise() end),
 		awful.button({modkey}, 1, awful.mouse.client.move),
 		awful.button({}, 2, function(c) client.focus = c; c:raise() end),
 		awful.button({modkey}, 3, awful.mouse.client.resize)),
-	awful.button({}, 3, function(c) client.focus = c; c:raise() end)
+		awful.button({}, 3, function(c) client.focus = c; c:raise() end)
+	return client
 end
 
 

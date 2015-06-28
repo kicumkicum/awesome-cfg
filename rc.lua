@@ -10,11 +10,11 @@ local awful = require('awful')
 awful.rules = require('awful.rules')
 
 local beautiful = require('beautiful')
-local gears = require('gears')
 local wibox = require('wibox')
 
 local popup = require('widget.popup')
 local panel = require('widget.panel')
+local wallpaper = require('widget.wallpaper')
 local tag = require('rules.tag')
 local keybinding = require('rules.keybinding')
 local layout = require('rules.layout')
@@ -43,30 +43,16 @@ end
 -- }}}
 
 beautiful.init('/home/oleg/.config/awesome/themes/zenburn/theme.lua')
-
 local layouts = layout.init()
-
--- {{{ Wallpaper
-if beautiful.wallpaper then
-	for s = 1, screen.count() do
-		gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-	end
-end
--- }}}
-
+panel.init(layouts)
+wallpaper.init()
 tags = tag.init()
-panel.init()
--- }}}
 
--- {{{ Mouse bindings
---root.buttons(awful.util.table.join(
---	awful.button({ }, 3, function() mymainmenu:toggle() end),
---	awful.button({ }, 4, awful.tag.viewnext),
---	awful.button({ }, 5, awful.tag.viewprev)
---))
--- }}}
+local keys = keybinding.init()
+root.keys(keys.globalKeys)
+local clientkeys = keys.client.keys
+local clientbuttons = keys.client.buttons
 
-keybinding.init()
 
 -- {{{ Rules
 awful.rules.rules = {

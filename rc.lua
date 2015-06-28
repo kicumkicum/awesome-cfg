@@ -7,10 +7,7 @@ awful.rules = require('awful.rules')
 local beautiful = require('beautiful')
 local gears = require('gears')
 local menubar = require('menubar')
-local naughty = require('naughty')
 local wibox = require('wibox')
-
-local plugins = require('plugins')
 
 local popup = require('widget.popup')
 local tag = require('rules.tag')
@@ -32,13 +29,9 @@ do
 		if in_error then
             return
         end
-		in_error = true
 
-		naughty.notify({
-            preset = naughty.config.presets.critical,
-			title = 'Oops, an error happened!',
-			text = err
-        })
+		in_error = true
+		popup.error()
 		in_error = false
 	end)
 end
@@ -176,7 +169,7 @@ for s = 1, screen.count() do
 	-- Widgets that are aligned to the right
 	local right_layout = wibox.layout.fixed.horizontal()
 	if (s == 1) then 
-		right_layout:add(wibox.widget.systray()) 
+		right_layout:add(wibox.widget.systray())
 	end
 	right_layout:add(mytextclock)
 	right_layout:add(mylayoutbox[s])

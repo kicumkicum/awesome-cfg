@@ -12,6 +12,7 @@ awful.rules = require('awful.rules')
 local beautiful = require('beautiful')
 
 local panel = require('widget.panel')
+local dysplay = require('widget.display')
 local wallpaper = require('widget.wallpaper')
 local tag = require('rules.tag')
 local keybinding = require('rules.keybinding')
@@ -22,7 +23,8 @@ handler.error.init()
 
 beautiful.init('/home/oleg/.config/awesome/themes/zenburn/theme.lua')
 local layouts = layout.init()
-panel.init(layouts)
+--panel.init(layouts)
+dysplay.init(layouts)
 wallpaper.init()
 tags = tag.init()
 

@@ -7,7 +7,7 @@
 --
 local display = {}
 
-display.init = function(layouts)
+display.init = function()
 
     local menubar = require('menubar')
     local panel = require('widget.panel2')
@@ -19,7 +19,7 @@ display.init = function(layouts)
 
     display.screen = {}
     for screenIndex = 1, screen.count() do
-        display.screen[screenIndex] = screenW.init(layouts, screenIndex, punelResult)
+        display.screen[screenIndex] = screenW.init(screenIndex, punelResult)
     end
 
     return display

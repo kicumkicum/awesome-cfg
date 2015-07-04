@@ -12,14 +12,11 @@ local awful = require('awful')
 local panel = {}
 
 panel.init = function()
-    local textClock = panel.createClock()
-    local tagList = panel.createTagList()
-    local taskList = panel.createTaskList()
-
     return {
-        textClock = textClock,
-        tagList = tagList,
-        taskList = taskList
+        textClock = panel.createClock(),
+        tagList = panel.createTagList(),
+        taskList = panel.createTaskList(),
+        layouts = panel.createLayouts()
     }
 end
 
@@ -76,7 +73,23 @@ panel.createPromptBox = function()
     return awful.widget.prompt()
 end
 
-
+panel.createLayouts = function()
+    return {
+        awful.layout.suit.tile,
+        awful.layout.suit.tile.top,
+        awful.layout.suit.tile.left,
+        awful.layout.suit.max,
+        awful.layout.suit.magnifier,
+        awful.layout.suit.floating
+        --awful.layout.suit.tile.bottom,
+        --awful.layout.suit.fair,
+        --awful.layout.suit.fair.horizontal,
+        --awful.layout.suit.spiral,
+        --awful.layout.suit.spiral.dwindle,
+        --awful.layout.suit.max.fullscreen,
+    }
+    -- }}}
+end
 
 
 return panel

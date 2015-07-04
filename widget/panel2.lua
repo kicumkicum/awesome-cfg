@@ -74,7 +74,8 @@ panel.createPromptBox = function()
 end
 
 panel.createLayouts = function()
-    return {
+    return layouts
+    --[[return {
         awful.layout.suit.tile,
         awful.layout.suit.tile.top,
         awful.layout.suit.tile.left,
@@ -87,7 +88,7 @@ panel.createLayouts = function()
         --awful.layout.suit.spiral,
         --awful.layout.suit.spiral.dwindle,
         --awful.layout.suit.max.fullscreen,
-    }
+    }]]
     -- }}}
 end
 

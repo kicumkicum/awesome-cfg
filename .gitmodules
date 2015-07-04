@@ -1,6 +1,6 @@
-[submodule "tyrannical"]
-	path = tyrannical
-	url = git@github.com:Elv13/tyrannical.git
-[submodule "awesome-revelation"]
-	path = awesome-revelation
+[submodule "plugins/tyrannical"]
+	path = plugins/tyrannical
+	url = git@github.com:kicumkicum/tyrannical.git
+[submodule "plugins/revelation"]
+	path = plugins/revelation
 	url = git@github.com:bioe007/awesome-revelation.git

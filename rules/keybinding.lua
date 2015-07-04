@@ -37,6 +37,7 @@ keybinging.global = function()
 		keybinging.tasks.tag.nextClientPosition,
 		keybinging.tasks.tag.prevClientPosition,
 		keybinging.tasks.tag.changeLayout,
+		keybinging.tasks.tag.nextLayout,
 		keybinging.tasks.tag.prevLayout,
 
 		keybinging.tasks.client.unminimaze,

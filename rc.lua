@@ -16,7 +16,7 @@ local tag = require('rules.tag')
 local handler = require('handler')
 
 local layout = require('rules.layout')
-layouts = layout.init()
+local layouts = layout.init()
 
 local keybinding = require('rules.keybinding')
 
@@ -26,7 +26,7 @@ dysplay.init(layouts)
 wallpaper.init()
 tags = tag.init()
 
-local keys = keybinding.init()
+local keys = keybinding.init(layouts)
 root.keys(keys.globalKeys)
 local clientkeys = keys.client.clientKeys
 local clientbuttons = keys.client.clientButtons

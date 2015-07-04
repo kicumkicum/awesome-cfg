@@ -9,11 +9,10 @@ local awful = require('awful')
 local wibox = require('wibox')
 local screen = {}
 
-screen.init = function(screenIndex, panel)
+screen.init = function(screenIndex, panel, layouts)
     local mytasklist = panel.taskList
     local mytaglist = panel.tagList
     local mytextclock = panel.textClock
-    local layouts = panel.layouts
 
     mypromptbox = {}-- todo make local
     local mylayoutbox = {}

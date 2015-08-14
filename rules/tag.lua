@@ -56,7 +56,7 @@ tag.init = function()
             -- The tag can be used on both screen, but only one at once
             layout 		= awful.layout.suit.tile,
             class 		= {
-                'Skype', 'Telegram'
+                'Skype', 'Telegram', 'Scudcloud'
             }
         }, {
             name		= 'files',

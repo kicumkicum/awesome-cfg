@@ -10,7 +10,6 @@ local awful = require('awful')
 awful.rules = require('awful.rules')
 
 local beautiful = require('beautiful')
-
 local dysplay = require('widget.display')
 local wallpaper = require('widget.wallpaper')
 local tag = require('rules.tag')
@@ -18,6 +17,7 @@ local handler = require('handler')
 
 local layout = require('rules.layout')
 layouts = layout.init()
+
 local keybinding = require('rules.keybinding')
 
 handler.error.init()
@@ -35,7 +35,7 @@ local clientbuttons = keys.client.clientButtons
 awful.rules.rules = {
 	-- All clients will match this rule.
 	{
-        rule = {},
+		rule = {},
 		properties = {
 			border_width = beautiful.border_width,
 			border_color = beautiful.border_normal,

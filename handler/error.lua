@@ -9,21 +9,21 @@ local popup = require('widget.popup')
 local error = {}
 
 error.init = function()
-    if awesome.startup_errors then
-        popup.error('awesome.startup_errors')
-    end
+	if awesome.startup_errors then
+		popup.error('awesome.startup_errors')
+	end
 
-    local in_error = false
-    awesome.connect_signal('debug::error', function(err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then
-            return
-        end
+	local in_error = false
+	awesome.connect_signal('debug::error', function(err)
+		-- Make sure we don't go into an endless error loop
+		if in_error then
+			return
+		end
 
-        in_error = true
-        popup.error('', err)
-        in_error = false
-    end)
+		in_error = true
+		popup.error('', err)
+		in_error = false
+	end)
 end
 
 return error

@@ -34,7 +34,7 @@ tag.init = function()
             screen		= screen.count() > 1 and 2 or 1,-- Setup on screen 2 if there is more than 1 screen, else on screen 1
             layout		= awful.layout.suit.max,	-- Use the max layout
             class 		= {
-                "jetbrains-webstorm", "jetbrains-android-studio", "jetbrains-android-studi", "Chromium-browser"
+                "jetbrains-webstorm", "jetbrains-android-studio", "jetbrains-android-studi", "Chromium-browser", 'Opera'
             }
         }, {
             name 		= 'www',
@@ -44,7 +44,7 @@ tag.init = function()
             screen		= 1,
             layout		= awful.layout.suit.max,
             class		= {
-                'Opera', 'Firefox', 'Google-chrome', 'Chrome', 'Opera developer', 'Vivaldi', 'Opera beta'
+                'Firefox', 'Google-chrome', 'Chrome', 'Opera developer', 'Vivaldi', 'Opera beta', 'vivaldi-preview'
             }
         }, {
             name 		= 'im',
@@ -56,7 +56,7 @@ tag.init = function()
             -- The tag can be used on both screen, but only one at once
             layout 		= awful.layout.suit.tile,
             class 		= {
-                'Skype', 'Telegram'
+                'Skype', 'Telegram', 'Scudcloud', 'Slack'
             }
         }, {
             name		= 'files',
@@ -77,7 +77,7 @@ tag.init = function()
             exclusive	= true,
             layout 		= awful.layout.suit.tile,
             class 		= {
-                'Foobnix', 'Steam'
+                'Foobnix', 'Steam', 'Mpv'
             }
         }, {
             name		= 'vm',

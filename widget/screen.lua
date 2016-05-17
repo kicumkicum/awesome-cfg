@@ -52,7 +52,7 @@ screen.init = function(screenIndex, panel, layouts)
     if (screenIndex == 1) then
         right_layout:add(wibox.widget.systray())
     end
-    right_layout:add(mytextclock)
+--    right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[screenIndex])
 
     -- Now bring it all together (with the tasklist in the middle)

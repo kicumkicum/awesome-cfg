@@ -8,8 +8,8 @@
 local awful = require('awful')
 local keybinging = {}
 
-keybinging.init = function()
-	local globalKeys = keybinging.global()
+keybinging.init = function(layouts)
+	local globalKeys = keybinging.global(layouts)
 	local client = keybinging.client()
 	return {
 		globalKeys = globalKeys,
@@ -18,8 +18,10 @@ keybinging.init = function()
 end
 
 
-keybinging.global = function()
+keybinging.global = function(layouts)
 	local globalBinding
+
+	keybinging._initTasks(layouts)
 	globalBinding = awful.util.table.join(
 		keybinging.tasks.volume.up,
 		keybinging.tasks.volume.down,
@@ -164,88 +166,84 @@ keybinging.client = function()
 end
 
 
----
--- @field volume
--- @field client
--- @field screen
--- @field tag
---
-keybinging.tasks = {
-	volume = {
-		up = awful.key({}, 'XF86AudioRaiseVolume', function() awful.util.spawn('amixer set Master 2%+') end),
-		down = awful.key({}, 'XF86AudioLowerVolume', function() awful.util.spawn('amixer set Master 2%-') end),
-		mute = awful.key({}, 'XF86AudioMute', function() awful.util.spawn('amixer -D pulse set Master 1+ toggle') end)
-	},
-	client = {
-		moveToScreen = awful.key({modkey, 'Control'}, 'm', awful.client.movetoscreen),
-		unminimaze = awful.key({modkey, 'Control'}, 'n', awful.client.restore),
-		larger = awful.key({modkey}, 'l', function() awful.tag.incmwfact(0.05) end),
-		less = awful.key({modkey}, 'h', function() awful.tag.incmwfact(-0.05) end),
+keybinging._initTasks = function(layouts)
+	keybinging.tasks = {
+		volume = {
+			up = awful.key({}, 'XF86AudioRaiseVolume', function() awful.util.spawn('amixer set Master 2%+') end),
+			down = awful.key({}, 'XF86AudioLowerVolume', function() awful.util.spawn('amixer set Master 2%-') end),
+			mute = awful.key({}, 'XF86AudioMute', function() awful.util.spawn('amixer -D pulse set Master 1+ toggle') end)
+		},
+		client = {
+			moveToScreen = awful.key({modkey, 'Control'}, 'm', awful.client.movetoscreen),
+			unminimaze = awful.key({modkey, 'Control'}, 'n', awful.client.restore),
+			larger = awful.key({modkey}, 'l', function() awful.tag.incmwfact(0.05) end),
+			less = awful.key({modkey}, 'h', function() awful.tag.incmwfact(-0.05) end),
 
-	},
-	screen = {
-		nextTag = awful.key({modkey}, 'Left',	awful.tag.viewprev),
-		prevTag = awful.key({modkey}, 'Right', awful.tag.viewnext),
-		toggleTag = awful.key({modkey}, '#49', awful.tag.history.restore),-- '~'
-		goToFirst = awful.key({modkey, 'Control'}, 'h', function() awful.screen.focus(1) end),
-		goToSecond = awful.key({modkey, 'Control'}, 's', function() awful.screen.focus(2) end),
-	},
-	tag = {
-		nextClientPosition = awful.key({modkey, 'Shift'}, 'j', function() awful.client.swap.byidx(1) end),
-		prevClientPosition = awful.key({modkey, 'Shift'}, 'k', function() awful.client.swap.byidx(-1) end),
-		nextLayout = awful.key({modkey}, 'space', function() awful.layout.inc(layouts, 1) end),
-		prevLayout = awful.key({modkey, 'Shift'}, 'space', function() awful.layout.inc(layouts, -1) end),
+		},
+		screen = {
+			nextTag = awful.key({modkey}, 'Left',	awful.tag.viewprev),
+			prevTag = awful.key({modkey}, 'Right', awful.tag.viewnext),
+			toggleTag = awful.key({modkey}, '#49', awful.tag.history.restore),-- '~'
+			goToFirst = awful.key({modkey, 'Control'}, 'h', function() awful.screen.focus(1) end),
+			goToSecond = awful.key({modkey, 'Control'}, 's', function() awful.screen.focus(2) end),
+		},
+		tag = {
+			nextClientPosition = awful.key({modkey, 'Shift'}, 'j', function() awful.client.swap.byidx(1) end),
+			prevClientPosition = awful.key({modkey, 'Shift'}, 'k', function() awful.client.swap.byidx(-1) end),
+			nextLayout = awful.key({modkey}, 'space', function() awful.layout.inc(layouts, 1) end),
+			prevLayout = awful.key({modkey, 'Shift'}, 'space', function() awful.layout.inc(layouts, -1) end),
 
-		nextClientFocus = awful.key({modkey}, 'j', function()
-			awful.client.focus.byidx( 1)
-			if client.focus then
-				client.focus:raise()
-			end
-		end),
+			nextClientFocus = awful.key({modkey}, 'j', function()
+				awful.client.focus.byidx( 1)
+				if client.focus then
+					client.focus:raise()
+				end
+			end),
 
-		prevClientFocus = awful.key({modkey}, 'k', function()
-			awful.client.focus.byidx(-1)
-			if client.focus then
-				client.focus:raise()
-			end
-		end),
+			prevClientFocus = awful.key({modkey}, 'k', function()
+				awful.client.focus.byidx(-1)
+				if client.focus then
+					client.focus:raise()
+				end
+			end),
 
-		toggleClientFocus = awful.key({modkey}, 'Tab', function()
-			awful.client.focus.history.previous()
-			if client.focus then
-				client.focus:raise()
-			end
-		end)
+			toggleClientFocus = awful.key({modkey}, 'Tab', function()
+				awful.client.focus.history.previous()
+				if client.focus then
+					client.focus:raise()
+				end
+			end)
 
---      TODO разобраться что делают эти хоткеи
---		awful.key({modkey}, 'l', function() awful.tag.incmwfact( 0.05)	end),
---		awful.key({modkey}, 'h', function() awful.tag.incmwfact(-0.05)	end),
---		awful.key({modkey, 'Control'}, 'j', function() awful.screen.focus_relative(1) end),
---		awful.key({modkey, 'Control'}, 'k', function() awful.screen.focus_relative(-1) end),
---		awful.key({modkey}, 'u', awful.client.urgent.jumpto),
---		awful.key({modkey, 'Shift'}, 'h', function() awful.tag.incnmaster( 1)	end),
---		awful.key({modkey, 'Shift'}, 'l', function() awful.tag.incnmaster(-1)	end),
---		awful.key({modkey, 'Control'}, 'h', function() awful.tag.incncol( 1)		end),
---		awful.key({modkey, 'Control'}, 'l', function() awful.tag.incncol(-1)		end)
-	},
-	action = {
-		runTerminal = awful.key({modkey}, 'Return', function()
-			awful.util.spawn(terminal)
-		end),
-		restartAwesome = awful.key({modkey, 'Control'}, 'r', awesome.restart),
-		quitAwesome = awful.key({modkey, 'Shift'}, 'q', awesome.quit),
-		runCommand = awful.key({modkey}, 'r', function() mypromptbox[1]:run() end), --mypromptbox[mouse.screen]:run()mouse.screen
-		runApplication = awful.key({modkey}, 'p', function() menubar.show() end),
+			--      TODO разобраться что делают эти хоткеи
+			--		awful.key({modkey}, 'l', function() awful.tag.incmwfact( 0.05)	end),
+			--		awful.key({modkey}, 'h', function() awful.tag.incmwfact(-0.05)	end),
+			--		awful.key({modkey, 'Control'}, 'j', function() awful.screen.focus_relative(1) end),
+			--		awful.key({modkey, 'Control'}, 'k', function() awful.screen.focus_relative(-1) end),
+			--		awful.key({modkey}, 'u', awful.client.urgent.jumpto),
+			--		awful.key({modkey, 'Shift'}, 'h', function() awful.tag.incnmaster( 1)	end),
+			--		awful.key({modkey, 'Shift'}, 'l', function() awful.tag.incnmaster(-1)	end),
+			--		awful.key({modkey, 'Control'}, 'h', function() awful.tag.incncol( 1)		end),
+			--		awful.key({modkey, 'Control'}, 'l', function() awful.tag.incncol(-1)		end)
+		},
+		action = {
+			runTerminal = awful.key({modkey}, 'Return', function()
+				awful.util.spawn(terminal)
+			end),
+			restartAwesome = awful.key({modkey, 'Control'}, 'r', awesome.restart),
+			quitAwesome = awful.key({modkey, 'Shift'}, 'q', awesome.quit),
+			runCommand = awful.key({modkey}, 'r', function() mypromptbox[1]:run() end), --mypromptbox[mouse.screen]:run()mouse.screen
+			runApplication = awful.key({modkey}, 'p', function() menubar.show() end),
 
-		runLuaCode = awful.key({modkey}, 'x', function()
-			awful.prompt.run({prompt = 'Run Lua code: '},
-			mypromptbox[mouse.screen].widget,
-			awful.util.eval,
-			nil,
-			awful.util.getdir('cache') .. '/history_eval')
-		end)
+			runLuaCode = awful.key({modkey}, 'x', function()
+				awful.prompt.run({prompt = 'Run Lua code: '},
+					mypromptbox[mouse.screen].widget,
+					awful.util.eval,
+					nil,
+					awful.util.getdir('cache') .. '/history_eval')
+			end)
+		}
 	}
-}
+end
 
 
 return keybinging

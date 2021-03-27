@@ -21,7 +21,7 @@ tag.init = function()
             screen		= {1, 2},				-- Create this tag on screen 1 and screen 2
             layout		= awful.layout.suit.tile, -- Use the tile layout
             instance	= {'dev', 'ops'},		-- Accept the following instances. This takes precedence over 'class'
-            exec_once	= {'terminator'}, --When the tag is accessed for the first time, execute this command
+--            exec_once	= {'terminator'}, --When the tag is accessed for the first time, execute this command
             class		= { --Accept the following classes, refuse everything else (because of 'exclusive=true')
                 'X-terminal-emulator', 'xterm', 'urxvt', 'aterm', 'URxvt', 'XTerm', 'konsole', 'terminator', 'gnome-terminal'
             }
@@ -44,7 +44,7 @@ tag.init = function()
             screen		= 1,
             layout		= awful.layout.suit.max,
             class		= {
-                'Firefox', 'Google-chrome', 'Chrome', 'Opera developer', 'Vivaldi', 'Opera beta', 'vivaldi-preview'
+                'Opera', 'Firefox', 'Google-chrome', 'Chrome', 'Opera developer', 'Vivaldi', 'Opera beta', 'Chromium', 'Vivaldi-stable', 'vivaldi-preview'
             }
         }, {
             name 		= 'im',
@@ -56,7 +56,7 @@ tag.init = function()
             -- The tag can be used on both screen, but only one at once
             layout 		= awful.layout.suit.tile,
             class 		= {
-                'Skype', 'Telegram', 'Scudcloud', 'Slack'
+                'Skype', 'Telegram', 'TelegramDesktop', 'Scudcloud', 'Slack'
             }
         }, {
             name		= 'files',

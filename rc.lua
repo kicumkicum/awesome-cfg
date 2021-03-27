@@ -4,7 +4,7 @@ editor = 'sublime' -- os.getenv('EDITOR') or
 editor_cmd = terminal .. ' -e ' .. editor
 
 require('awful.autofocus')
-require('wicked')
+--require('vicious')
 
 local awful = require('awful')
 awful.rules = require('awful.rules')

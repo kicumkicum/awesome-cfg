@@ -6,6 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 local awful = require('awful')
+local menubar = require("menubar")
 local keybinging = {}
 
 keybinging.init = function(layouts)

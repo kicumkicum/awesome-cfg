@@ -5,21 +5,22 @@
 -- Time: 3:13
 -- To change this template use File | Settings | File Templates.
 --
+local menubar = require('menubar')
+local panel = require('widget.panel2')
+local screenW = require('widget.screen')
+
 local display = {}
 
 display.init = function(layouts)
-
-    local menubar = require('menubar')
-    local panel = require('widget.panel2')
-    local screenW = require('widget.screen')
     menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 
-    local punelResult = panel.init()
-    punelResult.createPromptBox = panel.createPromptBox
+    local panelResult = panel.init()
+    panelResult.createPromptBox = panel.createPromptBox
 
     display.screen = {}
+
     for screenIndex = 1, screen.count() do
-        display.screen[screenIndex] = screenW.init(screenIndex, punelResult, layouts)
+        display.screen[screenIndex] = screenW.init(screenIndex, panelResult, layouts)
     end
 
     return display

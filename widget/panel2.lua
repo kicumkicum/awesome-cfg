@@ -7,8 +7,6 @@
 --
 local awful = require('awful')
 
-
-
 local panel = {}
 
 panel.init = function()
@@ -18,8 +16,6 @@ panel.init = function()
         taskList = panel.createTaskList()
     }
 end
-
-
 
 panel.createClock = function()
     return awful.widget.textclock()
@@ -34,7 +30,6 @@ panel.createTagList = function()
     )
     return mytaglist
 end
-
 
 panel.createTaskList = function()
     local mytasklist = {}
@@ -67,11 +62,9 @@ panel.createTaskList = function()
     return mytasklist
 end
 
-
 panel.createPromptBox = function()
     return awful.widget.prompt()
 end
-
 
 return panel
 

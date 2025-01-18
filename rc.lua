@@ -40,6 +40,8 @@ wallpaper.init()
 
 tags = tag.init()
 
+awful.spawn.with_shell("picom --experimental-backends --config ~/.config/awesome/picom.conf")
+
 local keys = keybinding.init(layouts)
 root.keys(keys.globalKeys)
 

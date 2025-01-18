@@ -13,6 +13,7 @@ screen.init = function(screenIndex, panel, layouts)
     local mytasklist = panel.taskList
     local mytaglist = panel.tagList
     local mytextclock = panel.textClock
+    local battery = panel.battery
 
     mypromptbox = {}-- todo make local
     local mylayoutbox = {}
@@ -52,6 +53,7 @@ screen.init = function(screenIndex, panel, layouts)
     if (screenIndex == 1) then
         right_layout:add(wibox.widget.systray())
     end
+    right_layout:add(battery)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[screenIndex])
 

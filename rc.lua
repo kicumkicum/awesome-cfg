@@ -27,11 +27,13 @@ local USER = os.getenv('USER')
 local layouts = layout.init()
 handler.error.init()
 
-if USER == HOME_PROFILE then
-	beautiful.init('/home/oleg/.config/awesome/themes/zenburn/theme.lua')
-else
-	beautiful.init('/usr/share/awesome/themes/sky/theme.lua')
-end
+beautiful.init('/home/akioo/.config/awesome/themes/zenburn/theme.lua')
+
+-- if USER == HOME_PROFILE then
+-- 	beautiful.init('/home/oleg/.config/awesome/themes/zenburn/theme.lua')
+-- else
+-- 	beautiful.init('/usr/share/awesome/themes/sky/theme.lua')
+-- end
 
 display.init(layouts)
 wallpaper.init()

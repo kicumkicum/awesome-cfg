@@ -231,7 +231,7 @@ keybinging._initTasks = function(layouts)
 				awful.util.spawn(terminal)
 			end),
 			restartAwesome = awful.key({modkey, 'Control'}, 'r', awesome.restart),
-			quitAwesome = awful.key({modkey, 'Shift'}, 'q', awesome.quit),
+-- 			quitAwesome = awful.key({modkey, 'Shift'}, 'q', awesome.quit),
 			runCommand = awful.key({modkey}, 'r', function() mypromptbox[1]:run() end), --mypromptbox[mouse.screen]:run()mouse.screen
 			runApplication = awful.key({modkey}, 'p', function() menubar.show() end),
 

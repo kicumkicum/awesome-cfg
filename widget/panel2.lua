@@ -26,7 +26,7 @@ local function createBattery()
 --         local battery_status = stdout:match("(%a+), (%d+)%%")  -- извлекаем статус и заряд батареи
 --         local status, charge, remaining_time = stdout:match("Battery %d+: (%a+), (%d+)%%, (%d+:%d+:%d+) remaining")
 
-        local pattern = "Battery %d+: ([%a%s]+), (%d+)%%,?%s*(%d+:%d+:%d+) %a+"
+        local pattern = "Battery %d+: ([%a%s]+), (%d+)%%,?%s*([%d+:%d+:%d+]*)"
         --
         -- -- Применение регулярного выражения к строкам
         local status, charge, remaining_time = stdout:match(pattern)
@@ -83,13 +83,16 @@ local function createBattery()
          f:close()
 
          -- Используем регулярное выражение для извлечения данных
-         local status, charge, remaining_time = battery_info:match("Battery %d+: ([%a%s]+), (%d+)%%,?%s*(%d+:%d+:%d+) %a+")
+         local status, charge, time = battery_info:match("Battery %d+: ([%a%s]+), (%d+)%%,?%s*([%d+:%d+:%d+]*)")
+         local b_text = "Status: " .. status .. "\n" ..
+              "Charge: " .. charge
+          if not time then
+            b_text = b_text .. "\n" .. "Time remaining: " .. time
+          end
 
          naughty.notify({
             title = "Battery Info",
-            text = "Status: " .. status .. "\n" ..
-                  "Charge: " .. charge .. "%\n" ..
-                  "Time remaining: " .. remaining_time,
+            text = b_text,
             timeout = 5  -- Всплывающее окно исчезает через 5 секунд
         })
     end)

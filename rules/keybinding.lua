@@ -67,15 +67,15 @@ keybinging.global = function(layouts)
 					awful.tag.viewonly(tag)
 				end
 			end),
-			awful.key({modkey, 'Mod1'}, '#' .. i + 9, function()
-				if i < 5 then
-					local screen = mouse.screen
-					local tag = awful.tag.gettags(screen)[i + 4]
-					if tag then
-						awful.tag.viewonly(tag)
-					end
-				end
-			end),
+-- 			awful.key({modkey, 'Mod1'}, '#' .. i + 9, function()
+-- 				if i < 5 then
+-- 					local screen = mouse.screen
+-- 					local tag = awful.tag.gettags(screen)[i + 4]
+-- 					if tag then
+-- 						awful.tag.viewonly(tag)
+-- 					end
+-- 				end
+-- 			end),
 			awful.key({modkey, 'Control'}, '#' .. i + 9, function()
 				local screen = mouse.screen
 				local tag = awful.tag.gettags(screen)[i]
@@ -96,6 +96,16 @@ keybinging.global = function(layouts)
 				end
 			end))
 	end
+
+    globalBinding = awful.util.table.join(globalBinding,
+        awful.key({'Mod1'}, '#' .. 3 + 9, function()
+            local screen = mouse.screen
+            local tag = awful.tag.gettags(screen)[9]
+            if tag then
+                awful.tag.viewonly(tag)
+            end
+        end)
+    )
 
 	--------------------------------------------------------
 	--------------switch tags with MOD+NUM_PAD--------------

@@ -37,7 +37,7 @@ tag.init = function()
                 "jetbrains-webstorm", "jetbrains-android-studio", "jetbrains-android-studi", "Chromium-browser", 'Opera'
             }
         }, {
-            name 		= 'www',
+            name 		= 'www_work',
             init		= true,
             exclusive	= true,
             no_focus_stealing_in = true,
@@ -56,7 +56,7 @@ tag.init = function()
             -- The tag can be used on both screen, but only one at once
             layout 		= awful.layout.suit.tile,
             class 		= {
-                'Skype', 'Telegram', 'TelegramDesktop', 'Scudcloud', 'Slack'
+                'Skype', 'Telegram', 'TelegramDesktop', 'Scudcloud', 'Slack', 'Zoom'
             }
         }, {
             name		= 'files',
@@ -102,6 +102,18 @@ tag.init = function()
             },
             no_focus_stealing_in = true,
             layout 		= awful.layout.suit.tile
+        }, {
+            name		= 'www_my',
+            init		= true, -- This tag wont be created at startup, but will be when one of the
+            -- client in the 'class' section will start. It will be created on
+            -- the client startup screen
+            exclusive	= true,
+            layout 		= awful.layout.suit.max,
+            class		= {
+                'Opera', 'Firefox', 'Google-chrome', 'Chrome', 'Opera developer', 'Opera beta', 'Chromium', 'Vivaldi-stable', 'vivaldi-preview'
+            },
+            no_focus_stealing_in = true,
+            layout 		= awful.layout.suit.max
         }
     }
 

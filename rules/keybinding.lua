@@ -52,7 +52,9 @@ keybinging.global = function(layouts)
 		keybinging.tasks.action.runLuaCode,
 		keybinging.tasks.action.runTerminal,
 		keybinging.tasks.action.restartAwesome,
-		keybinging.tasks.action.quitAwesome
+		keybinging.tasks.action.quitAwesome,
+
+		keybinging.tasks.action.printScreen
 	)
 
 	-- Bind all key numbers to tags.
@@ -251,7 +253,8 @@ keybinging._initTasks = function(layouts)
 					awful.util.eval,
 					nil,
 					awful.util.getdir('cache') .. '/history_eval')
-			end)
+			end),
+            printScreen = awful.key({ }, "Print", function () awful.util.spawn("mate-screenshot") end),
 		}
 	}
 end

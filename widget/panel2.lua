@@ -46,7 +46,7 @@ local function createBattery()
                     sound_timer:stop()
                     sound_timer = nil
                 end
-            elseif tonumber(charge) <= 10 then
+            elseif tonumber(charge) <= 5 then
                 widget:set_text(string.format("🔋 Low: %s%%", charge))
                 if not sound_timer then
                     sound_timer = gears.timer {
@@ -156,7 +156,7 @@ end
 
 
 panel.createClock = function()
-    local clock = awful.widget.textclock()
+    local clock = awful.widget.textclock("%H:%M")
 --     local month_calendar = awful.widget.calendar_popup.month()
 --     month_calendar:attach( clock, "tr" )
 --     month_calendar:toggle()
@@ -202,6 +202,7 @@ panel.createTaskList = function()
             end
         end)
     )
+
     return mytasklist
 end
 

@@ -12,7 +12,7 @@ theme.wallpaper = "/home/akioo/.config/awesome/themes/zenburn/zenburn-background
 -- }}}
 
 -- {{{ Styles
-theme.font      = "sans 8"
+theme.font      = "sans 10"
 
 -- {{{ Colors
 theme.fg_normal  = "#DCDCCC"

@@ -40,7 +40,8 @@ screen.init = function(screenIndex, panel, layouts)
     -- Create the wibox
     mywibox[screenIndex] = awful.wibox({
         position = 'top',
-        screen = screenIndex
+        screen = screenIndex,
+        height = 28,
     })
 
     -- Widgets that are aligned to the left
@@ -51,7 +52,7 @@ screen.init = function(screenIndex, panel, layouts)
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if (screenIndex == 1) then
-        right_layout:add(wibox.widget.systray())
+--         right_layout:add(wibox.widget.systray())
     end
     right_layout:add(battery)
     right_layout:add(mytextclock)

@@ -102,7 +102,7 @@ keybinging.global = function(layouts)
     globalBinding = awful.util.table.join(globalBinding,
         awful.key({'Mod1'}, '#' .. 3 + 9, function()
             local screen = mouse.screen
-            local tag = awful.tag.gettags(screen)[9]
+            local tag = awful.tag.gettags(screen)[6]
             if tag then
                 awful.tag.viewonly(tag)
             end

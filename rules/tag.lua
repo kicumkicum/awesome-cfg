@@ -34,17 +34,19 @@ tag.init = function()
             screen		= screen.count() > 1 and 2 or 1,-- Setup on screen 2 if there is more than 1 screen, else on screen 1
             layout		= awful.layout.suit.max,	-- Use the max layout
             class 		= {
-                "jetbrains-webstorm", "jetbrains-android-studio", "jetbrains-android-studi", "Chromium-browser", 'Opera'
+                "jetbrains-webstorm", "jetbrains-android-studio", "jetbrains-android-studi",
+                 "Chromium-browser", 'Google-chrome', 'Chrome', 'Chromium',
+                 'Opera', 'Firefox',
             }
         }, {
-            name 		= 'www_work',
+            name 		= 'www',
             init		= true,
             exclusive	= true,
             no_focus_stealing_in = true,
             screen		= 1,
             layout		= awful.layout.suit.max,
             class		= {
-                'Opera', 'Firefox', 'Google-chrome', 'Chrome', 'Opera developer', 'Vivaldi', 'Opera beta', 'Chromium', 'Vivaldi-stable', 'vivaldi-preview'
+                'Opera',  'Opera developer', 'Vivaldi', 'Opera beta',  'Vivaldi-stable', 'vivaldi-preview'
             }
         }, {
             name 		= 'im',
@@ -56,7 +58,7 @@ tag.init = function()
             -- The tag can be used on both screen, but only one at once
             layout 		= awful.layout.suit.tile,
             class 		= {
-                'Skype', 'Telegram', 'TelegramDesktop', 'Scudcloud', 'Slack', 'Zoom'
+                'Skype', 'Telegram', 'TelegramDesktop', 'Scudcloud', 'Slack', 'Zoom', 'vkteams'
             }
         }, {
             name		= 'files',
@@ -67,43 +69,43 @@ tag.init = function()
             no_focus_stealing_in = true,
             layout 		= awful.layout.suit.tile,
             class 		= {
-                'Thunar', 'Nautilus', 'Deluge'
+                'Thunar', 'Nautilus', 'Deluge', 'Caja', 'Soffice', 'libreoffice-impress', 'AmneziaVPN'
             }
+--         }, {
+--             name		= 'media',
+--             init		= true, -- This tag wont be created at startup, but will be when one of the
+--             -- client in the 'class' section will start. It will be created on
+--             -- the client startup screen
+--             exclusive	= true,
+--             layout 		= awful.layout.suit.tile,
+--             class 		= {
+--                 'Foobnix', 'Steam', 'Mpv'
+--             }
+--         }, {
+--             name		= 'vm',
+--             init		= true, -- This tag wont be created at startup, but will be when one of the
+--             -- client in the 'class' section will start. It will be created on
+--             -- the client startup screen
+--             exclusive	= true,
+--             no_focus_stealing_in = true,
+--             layout		= awful.layout.suit.max,
+--             class		= {
+--                 "VirtualBox", "Genymotion", "Player"
+--             }
+--         }, {
+--             name		= 'edit',
+--             init		= true, -- This tag wont be created at startup, but will be when one of the
+--             -- client in the 'class' section will start. It will be created on
+--             -- the client startup screen
+--             exclusive	= true,
+--             layout 		= awful.layout.suit.max,
+--             class		= {
+--                 'Sublime_text'
+--             },
+--             no_focus_stealing_in = true,
+--             layout 		= awful.layout.suit.tile
         }, {
-            name		= 'media',
-            init		= true, -- This tag wont be created at startup, but will be when one of the
-            -- client in the 'class' section will start. It will be created on
-            -- the client startup screen
-            exclusive	= true,
-            layout 		= awful.layout.suit.tile,
-            class 		= {
-                'Foobnix', 'Steam', 'Mpv'
-            }
-        }, {
-            name		= 'vm',
-            init		= true, -- This tag wont be created at startup, but will be when one of the
-            -- client in the 'class' section will start. It will be created on
-            -- the client startup screen
-            exclusive	= true,
-            no_focus_stealing_in = true,
-            layout		= awful.layout.suit.max,
-            class		= {
-                "VirtualBox", "Genymotion", "Player"
-            }
-        }, {
-            name		= 'edit',
-            init		= true, -- This tag wont be created at startup, but will be when one of the
-            -- client in the 'class' section will start. It will be created on
-            -- the client startup screen
-            exclusive	= true,
-            layout 		= awful.layout.suit.max,
-            class		= {
-                'Sublime_text'
-            },
-            no_focus_stealing_in = true,
-            layout 		= awful.layout.suit.tile
-        }, {
-            name		= 'www_my',
+            name		= '$www',
             init		= true, -- This tag wont be created at startup, but will be when one of the
             -- client in the 'class' section will start. It will be created on
             -- the client startup screen
@@ -114,6 +116,18 @@ tag.init = function()
             },
             no_focus_stealing_in = true,
             layout 		= awful.layout.suit.max
+        }, {
+            name                = 'agnts',
+            init                = true, -- This tag wont be created at startup, but will be when one of the
+            -- client in the 'class' section will start. It will be created on
+            -- the client startup screen
+            exclusive   = true,
+            layout              = awful.layout.suit.max,
+            class               = {
+                
+            },
+            no_focus_stealing_in = true,
+            layout              = awful.layout.suit.max
         }
     }
 

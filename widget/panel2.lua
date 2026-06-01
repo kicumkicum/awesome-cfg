@@ -14,6 +14,10 @@ local calendar = require("awful.widget.calendar_popup")
 local panel = {}
 local sound_timer = nil
 
+-- Suspend on critical battery (widget polls acpi). Cooldown avoids instant re-suspend after resume.
+local low_battery_suspend_last = 0
+local LOW_BATTERY_SUSPEND_COOLDOWN_SEC = 90
+
 local function play_sound()
     os.execute("paplay /usr/share/sounds/sound-icons/guitar-13.wav &")  -- Укажите путь к вашему звуковому файлу
 end
@@ -39,6 +43,10 @@ local function createBattery()
             -- Отображаем информацию о батарее
             widget:set_text(string.format("Battery: %s%% (%s)", charge, status))
 
+            if status == "Charging" or tonumber(charge) > 5 then
+                low_battery_suspend_last = 0
+            end
+
             -- Логика для отображения иконок в зависимости от заряда
             if status == "Charging" then
                 widget:set_text(string.format("🔌 %s%%", charge))
@@ -54,6 +62,15 @@ local function createBattery()
                         autostart = true,
                         callback = play_sound
                     }
+                end
+                local now = os.time()
+                if now - low_battery_suspend_last >= LOW_BATTERY_SUSPEND_COOLDOWN_SEC then
+                    low_battery_suspend_last = now
+                    if sound_timer then
+                        sound_timer:stop()
+                        sound_timer = nil
+                    end
+                    awful.spawn({ "systemctl", "suspend" })
                 end
             elseif tonumber(charge) < 50 then
                 widget:set_text(string.format("🔋 %s%%", charge))

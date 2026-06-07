@@ -94,23 +94,24 @@ local function createBattery()
         end
     end)
 
-    widget:connect_signal("mouse::enter", function()
-         local f = io.popen("acpi")
-         local battery_info = f:read("*all")
-         f:close()
+    widget:connect_signal("button::press", function(_, _, _, button)
+        if button ~= 1 then return end
 
-         -- Используем регулярное выражение для извлечения данных
-         local status, charge, time = battery_info:match("Battery %d+: ([%a%s]+), (%d+)%%,?%s*([%d+:%d+:%d+]*)")
-         local b_text = "Status: " .. status .. "\n" ..
-              "Charge: " .. charge
-          if not time then
-            b_text = b_text .. "\n" .. "Time remaining: " .. time
-          end
+        local f = io.popen("acpi")
+        local battery_info = f:read("*all")
+        f:close()
 
-         naughty.notify({
+        local status, charge, time = battery_info:match("Battery %d+: ([%a%s]+), (%d+)%%,?%s*([%d+:%d+:%d+]*)")
+        local b_text = "Status: " .. (status or "?") .. "\n" ..
+            "Charge: " .. (charge or "?") .. "%"
+        if time and time ~= "" then
+            b_text = b_text .. "\nTime remaining: " .. time
+        end
+
+        naughty.notify({
             title = "Battery Info",
             text = b_text,
-            timeout = 5  -- Всплывающее окно исчезает через 5 секунд
+            timeout = 5,
         })
     end)
 

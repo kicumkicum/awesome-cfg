@@ -9,6 +9,7 @@ local awful = require('awful')
 local wibox = require('wibox')
 local naughty = require('naughty')
 local gears = require('gears')
+local abutton = require('awful.button')
 local calendar = require("awful.widget.calendar_popup")
 
 local panel = {}
@@ -130,46 +131,50 @@ end
 
 
 local function createCalendar(anchor)
-      -- Календарь
-      local mycalendar = awful.widget.calendar_popup.month({
-          font = "monospace 10",     -- Шрифт
-          fg_normal = "#ffffff",     -- Цвет текста
-          fg_focus = "#ff0000",      -- Цвет выделенного дня
-          bg_normal = "#333333",     -- Цвет фона
-          bg_focus = "#444444",      -- Цвет фона выделенного дня
-          radius = 10,               -- Радиус углов
-          spacing = 5,               -- Расстояние между днями
-          attach_to = {},            -- Отключаем автоматическое привязывание
-          prev_month_button = wibox.widget {
-              text = "<",           -- Кнопка для предыдущего месяца
-              widget = wibox.widget.textbox,
-          },
-          next_month_button = wibox.widget {
-              text = ">",           -- Кнопка для следующего месяца
-              widget = wibox.widget.textbox,
-          },
-      })
+    local mycalendar = awful.widget.calendar_popup.month({
+        font = "monospace 10",
+        spacing = 5,
+        style_header = {
+            fg_color = "#ffffff",
+            markup = function(t) return "<b>" .. t .. "</b>" end,
+        },
+        style_weekday = { fg_color = "#ffffff", bg_color = "#333333" },
+        style_normal = { fg_color = "#ffffff", bg_color = "#333333" },
+        style_focus = { fg_color = "#ff0000", bg_color = "#444444" },
+    })
 
-   -- Функция для переключения видимости календаря
-   local calendar_visible = false
-   local function toggle_calendar()
-       if calendar_visible then
-           mycalendar:toggle() -- Скрыть календарь
-       else
-           mycalendar:toggle() -- Показать календарь
-       end
-       calendar_visible = not calendar_visible
-   end
+    local cal_widget = mycalendar:get_widget()
+    local original_fn_embed = cal_widget._private.fn_embed
 
-   -- Привязываем календарь к клику по часам
-   anchor:connect_signal("button::press", function(_, _, _, button)
-       if button == 1 then  -- Левый клик
---            toggle_calendar()
-       end
-   end)
+    local function nav_button(symbol, delta)
+        local btn = wibox.widget.textbox(symbol)
+        btn:buttons(gears.table.join(
+            abutton({}, 1, function()
+                mycalendar:call_calendar(delta)
+            end)
+        ))
+        return btn
+    end
 
-   mycalendar:attach(anchor, "tr", { on_hover = false })
+    cal_widget:set_fn_embed(function(widget, flag, date)
+        local embedded = original_fn_embed(widget, flag, date)
+        if flag == "header" then
+            return wibox.widget {
+                nav_button("◀", -1),
+                {
+                    embedded,
+                    margins = 4,
+                    widget = wibox.container.margin,
+                },
+                nav_button("▶", 1),
+                spacing = 8,
+                layout = wibox.layout.fixed.horizontal,
+            }
+        end
+        return embedded
+    end)
 
+    mycalendar:attach(anchor, "tr", { on_hover = false })
 end
 
 
